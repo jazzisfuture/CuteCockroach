@@ -1,0 +1,5 @@
+{
+  "name": "Cute Cockroach Swarm",
+  "description": "A simulation of cute cockroaches using Boid algorithms with interactive swarm controls.",
+  "requestFramePermissions": []
+}
