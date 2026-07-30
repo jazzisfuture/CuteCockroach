@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>西澳北线 · 珊瑚海岸 10–11 天</title>
-  <meta name="description" content="珀斯 → 尖石阵 → 卡尔巴里 → Exmouth / 宁格鲁 · 跳过鲨鱼湾的北线行程" />
+  <title>西澳北线 · 开车往返 10–11 天</title>
+  <meta name="description" content="珀斯 ↔ 尖石阵 ↔ 卡尔巴里 ↔ Exmouth / 宁格鲁 · 跳过鲨鱼湾的开车往返行程" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -26,7 +26,6 @@
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -43,12 +42,8 @@
     a { color: var(--sea); text-decoration-thickness: 1px; text-underline-offset: 3px; }
     a:hover { color: var(--coral); }
 
-    .wrap {
-      width: min(1120px, calc(100% - 2rem));
-      margin: 0 auto;
-    }
+    .wrap { width: min(1120px, calc(100% - 2rem)); margin: 0 auto; }
 
-    /* —— Hero —— */
     .hero {
       position: relative;
       min-height: 92vh;
@@ -106,7 +101,7 @@
       position: relative;
       z-index: 2;
       color: #f7faf9;
-      max-width: 42rem;
+      max-width: 44rem;
       padding-bottom: 1rem;
       animation: rise 0.9s ease-out both;
     }
@@ -132,7 +127,7 @@
     .hero-copy p {
       font-size: 1.05rem;
       color: rgba(247, 250, 249, 0.88);
-      max-width: 34rem;
+      max-width: 36rem;
       margin-bottom: 1.5rem;
     }
 
@@ -158,36 +153,23 @@
     }
 
     .btn:hover { transform: translateY(-1px); }
-
-    .btn-primary {
-      background: #f3f7f4;
-      color: var(--sea-deep);
-    }
-
+    .btn-primary { background: #f3f7f4; color: var(--sea-deep); }
     .btn-ghost {
       background: rgba(255, 255, 255, 0.12);
       color: #fff;
       border: 1px solid rgba(255, 255, 255, 0.35);
       backdrop-filter: blur(8px);
     }
-
-    .btn-sea {
-      background: var(--sea);
-      color: #fff;
-    }
-
+    .btn-sea { background: var(--sea); color: #fff; }
     .btn-sea:hover { background: var(--sea-deep); color: #fff; }
 
-    /* —— Sections —— */
-    section {
-      padding: 4rem 0 1rem;
-    }
+    section { padding: 4rem 0 1rem; }
 
     .section-head {
       display: grid;
       gap: 0.6rem;
       margin-bottom: 1.5rem;
-      max-width: 40rem;
+      max-width: 42rem;
     }
 
     .section-head .eyebrow {
@@ -207,7 +189,6 @@
 
     .section-head p { color: var(--muted); }
 
-    /* —— Map —— */
     .map-panel {
       background: var(--card);
       backdrop-filter: blur(12px);
@@ -229,10 +210,7 @@
       background: rgba(255, 255, 255, 0.55);
     }
 
-    .map-toolbar strong {
-      font-size: 0.95rem;
-    }
-
+    .map-toolbar strong { font-size: 0.95rem; }
     .map-toolbar span {
       display: block;
       color: var(--muted);
@@ -240,11 +218,7 @@
       margin-top: 0.15rem;
     }
 
-    .map-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
+    .map-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
     #route-map {
       height: min(68vh, 640px);
@@ -291,7 +265,6 @@
       margin-bottom: 0.25rem;
     }
 
-    /* —— Overview chips —— */
     .chips {
       display: flex;
       flex-wrap: wrap;
@@ -309,12 +282,25 @@
       font-weight: 600;
     }
 
-    /* —— Timeline —— */
-    .timeline {
-      display: grid;
-      gap: 1rem;
-      margin-top: 0.5rem;
+    .chip.return {
+      background: rgba(196, 92, 62, 0.1);
+      color: #8a3a26;
+      border-color: rgba(196, 92, 62, 0.2);
     }
+
+    .callout {
+      margin-top: 1rem;
+      padding: 1rem 1.15rem;
+      border-radius: var(--radius);
+      background: rgba(196, 92, 62, 0.08);
+      border: 1px solid rgba(196, 92, 62, 0.18);
+      color: var(--sea-deep);
+      font-size: 0.95rem;
+    }
+
+    .callout strong { color: var(--coral); }
+
+    .timeline { display: grid; gap: 1rem; margin-top: 0.5rem; }
 
     .day {
       display: grid;
@@ -338,12 +324,18 @@
       box-shadow: 0 0 0 3px rgba(26, 122, 109, 0.12);
     }
 
+    .day.leg-return {
+      border-left: 4px solid var(--coral);
+    }
+
     .day-num {
       font-family: "Instrument Serif", Georgia, serif;
       font-size: 2rem;
       line-height: 1;
       color: var(--sea);
     }
+
+    .day.leg-return .day-num { color: var(--coral); }
 
     .day-num small {
       display: block;
@@ -356,11 +348,7 @@
       font-weight: 700;
     }
 
-    .day h3 {
-      font-size: 1.15rem;
-      margin-bottom: 0.35rem;
-    }
-
+    .day h3 { font-size: 1.15rem; margin-bottom: 0.35rem; }
     .day p { color: var(--muted); font-size: 0.95rem; }
 
     .meta {
@@ -384,7 +372,6 @@
       vertical-align: middle;
     }
 
-    /* —— Tips / table —— */
     .grid-2 {
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
@@ -441,7 +428,13 @@
       vertical-align: top;
     }
 
-    th { color: var(--muted); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    th {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
 
     .google-embed {
       margin-top: 1rem;
@@ -498,11 +491,11 @@
         </div>
       </nav>
       <div class="hero-copy">
-        <div class="eyebrow" style="letter-spacing:0.14em;text-transform:uppercase;font-size:0.78rem;font-weight:700;color:#b8e0d6;">西澳 · 10–11 天北线</div>
-        <h1>珊瑚海岸<br /><em>跳过鲨鱼湾</em>的完整路线</h1>
-        <p>珀斯出发，经尖石阵、卡尔巴里，北上 Exmouth / 宁格鲁浮潜。鲨鱼湾无房也不影响主线体验。</p>
+        <div style="letter-spacing:0.14em;text-transform:uppercase;font-size:0.78rem;font-weight:700;color:#b8e0d6;">西澳 · 10–11 天 · 全程自驾往返</div>
+        <h1>珊瑚海岸<br /><em>开车往返</em>完整路线</h1>
+        <p>珀斯北上尖石阵、卡尔巴里，抵达 Exmouth / 宁格鲁后原路南返。跳过鲨鱼湾，不订机票，车在珀斯取还。</p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="#map">查看互动路线图</a>
+          <a class="btn btn-primary" href="#map">查看往返路线图</a>
           <a class="btn btn-ghost" id="open-gmaps" href="#" target="_blank" rel="noopener">在 Google 地图打开</a>
         </div>
       </div>
@@ -513,38 +506,42 @@
     <section id="map">
       <div class="wrap">
         <div class="section-head">
-          <div class="eyebrow">Route Map</div>
-          <h2>整条北线，一眼看清</h2>
-          <p>点击地图标记可跳到对应日程。蓝线为自驾主线，Exmouth 回珀斯建议机票，避免超长回程。</p>
+          <div class="eyebrow">Round-trip Map</div>
+          <h2>北上实线 · 南返虚线</h2>
+          <p>单程公路约 1,250 km，往返合计约 <strong>2,500 km</strong>。回程建议拆成 2–3 天，不要一天开回珀斯。</p>
         </div>
 
         <div class="chips" aria-label="行程概览">
-          <span class="chip">珀斯</span>
+          <span class="chip">珀斯出发</span>
           <span class="chip">尖石阵</span>
-          <span class="chip">Geraldton</span>
           <span class="chip">Kalbarri ×2</span>
-          <span class="chip">Carnarvon 过渡</span>
-          <span class="chip">Exmouth / 宁格鲁 ×4</span>
-          <span class="chip">飞回珀斯</span>
+          <span class="chip">Carnarvon</span>
+          <span class="chip">Exmouth ×2–3</span>
+          <span class="chip return">南返过渡</span>
+          <span class="chip return">开回珀斯</span>
+        </div>
+
+        <div class="callout">
+          <strong>和飞回相比：</strong>宁格鲁大约少 1–2 晚，但省机票、珀斯一地还车，公路感更完整。11 天比 10 天舒服很多。
         </div>
 
         <div class="map-panel" style="margin-top: 1.25rem;">
           <div class="map-toolbar">
             <div>
-              <strong>西澳珊瑚海岸自驾线</strong>
-              <span>Leaflet 互动图 · 约 1,250 km 北上（不含回程飞行）</span>
+              <strong>西澳珊瑚海岸 · 自驾往返</strong>
+              <span>蓝线北上 · 橙虚线南返 · 点击标记跳转日程</span>
             </div>
             <div class="map-actions">
-              <button type="button" class="btn btn-sea" id="fit-route">全览路线</button>
+              <button type="button" class="btn btn-sea" id="fit-route">全览往返</button>
               <a class="btn btn-ghost" style="background:#fff;color:var(--sea-deep);border-color:var(--line);" id="open-gmaps-2" href="#" target="_blank" rel="noopener">Google 导航</a>
             </div>
           </div>
-          <div id="route-map" role="application" aria-label="西澳北线路线图"></div>
+          <div id="route-map" role="application" aria-label="西澳北线往返路线图"></div>
           <div class="legend">
-            <div><i style="background:#0b4f6c"></i>自驾过夜点</div>
+            <div><i style="background:#0b4f6c"></i>过夜 / 主站点</div>
             <div><i style="background:#1a7a6d"></i>景点 / 浮潜</div>
-            <div><i style="background:#c45c3e"></i>回程航班（建议）</div>
-            <div><i style="background:#0b4f6c;border-radius:2px;width:14px;height:3px;vertical-align:middle;"></i>北上公路主线</div>
+            <div><i style="background:#0b4f6c;border-radius:2px;width:14px;height:3px;vertical-align:middle;"></i>北上</div>
+            <div><i style="background:#c45c3e;border-radius:2px;width:14px;height:3px;vertical-align:middle;"></i>南返（虚线）</div>
           </div>
         </div>
       </div>
@@ -554,13 +551,11 @@
       <div class="wrap">
         <div class="section-head">
           <div class="eyebrow">Day by Day</div>
-          <h2>10–11 天详细行程</h2>
-          <p>节奏偏松：卡尔巴里住够，把多出来的夜晚全给宁格鲁。</p>
+          <h2>11 天开车往返（推荐）</h2>
+          <p>北上不赶、宁格鲁留足 2–3 晚、回程拆两段。10 天版见文末压缩说明。</p>
         </div>
 
-        <div class="timeline" id="timeline">
-          <!-- filled by JS for single source of truth -->
-        </div>
+        <div class="timeline" id="timeline"></div>
       </div>
     </section>
 
@@ -568,11 +563,13 @@
       <div class="wrap">
         <div class="section-head">
           <div class="eyebrow">Google Maps</div>
-          <h2>完整谷歌路线</h2>
-          <p>下方嵌入 Google 地图驾车路线（珀斯 → 尖石阵 → Geraldton → Kalbarri → Carnarvon → Exmouth）。也可点按钮在 App 中打开。</p>
+          <h2>完整谷歌往返路线</h2>
+          <p>嵌入为北上主线；按钮打开的 Google 导航含往返途经点（珀斯 → … → Exmouth → Carnarvon → Geraldton → 珀斯）。</p>
         </div>
         <div class="cta-row" style="margin-bottom: 1rem;">
-          <a class="btn btn-sea" id="open-gmaps-3" href="#" target="_blank" rel="noopener">在 Google 地图中打开完整路线</a>
+          <a class="btn btn-sea" id="open-gmaps-3" href="#" target="_blank" rel="noopener">打开往返 Google 导航</a>
+          <a class="btn btn-ghost" style="background:#fff;color:var(--sea-deep);border-color:var(--line);" id="open-gmaps-north" href="#" target="_blank" rel="noopener">仅北上</a>
+          <a class="btn btn-ghost" style="background:#fff;color:var(--sea-deep);border-color:var(--line);" id="open-gmaps-south" href="#" target="_blank" rel="noopener">仅南返</a>
         </div>
         <div class="google-embed">
           <iframe
@@ -590,50 +587,60 @@
       <div class="wrap">
         <div class="section-head">
           <div class="eyebrow">Notes</div>
-          <h2>订房、驾驶与季节</h2>
+          <h2>往返自驾要点</h2>
         </div>
         <div class="grid-2">
           <div class="panel">
-            <h3>订房优先顺序</h3>
+            <h3>节奏怎么拆</h3>
             <ul>
-              <li>Exmouth（尽量 3–4 晚）</li>
-              <li>Kalbarri（2 晚）</li>
-              <li>过渡夜：Carnarvon；订不到可试 Coral Bay，或 Kalbarri 早发直开 Exmouth</li>
-              <li>Geraldton / Dongara、珀斯首尾相对好订</li>
-              <li>回程机票：Exmouth → 珀斯尽早定，车在 Exmouth 还</li>
+              <li>北上：珀斯 → Geraldton → Kalbarri(2) → Carnarvon → Exmouth</li>
+              <li>宁格鲁：优先保证 2 整日（浮潜 + Cape Range）</li>
+              <li>南返：Exmouth → Carnarvon/Geraldton → 珀斯，至少 2 天</li>
+              <li>切忌 Exmouth 一天开回珀斯（12–14h，危险且无乐趣）</li>
+              <li>鲨鱼湾继续跳过；Coral Bay 可作北上或南返备选过夜</li>
             </ul>
           </div>
           <div class="panel">
             <h3>实用提醒</h3>
             <ul>
-              <li>夏天峡谷务必早出，中午避暑，带足水</li>
-              <li>北上加油站间距大，过半箱就考虑加油</li>
-              <li>Turquoise Bay 注意水流方向；Oyster Stacks 看潮汐窗口</li>
-              <li>鲸鲨船约 3–7 月需提前订</li>
-              <li>主点基本柏油路，普通轿车可完成</li>
+              <li>往返油费、轮胎、疲劳都要算进去；轮流开车最好</li>
+              <li>过半箱就加油；偏远段加油站可能早关</li>
+              <li>夏天中午少开长途、多休息；峡谷早出</li>
+              <li>回程可在尖石阵补拍（若北上赶日落）</li>
+              <li>车在珀斯取还，保险/里程条款出发前确认</li>
             </ul>
           </div>
         </div>
 
         <div class="panel" style="margin-top: 1rem;">
-          <h3>住宿与车程速查</h3>
+          <h3>车程速查（往返）</h3>
           <table>
             <thead>
               <tr>
                 <th>天</th>
-                <th>从 → 到</th>
+                <th>路段</th>
                 <th>大约车程</th>
                 <th>过夜</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>D2</td><td>珀斯 → 尖石阵 → Geraldton</td><td>2h + 2.5h</td><td>Geraldton</td></tr>
+              <tr><td>D2</td><td>珀斯 → 尖石阵 → Geraldton</td><td>约 5h+</td><td>Geraldton</td></tr>
               <tr><td>D3</td><td>Geraldton → Kalbarri</td><td>1.5–2h</td><td>Kalbarri</td></tr>
               <tr><td>D5</td><td>Kalbarri → Carnarvon</td><td>约 4.5h</td><td>Carnarvon</td></tr>
               <tr><td>D6</td><td>Carnarvon → Exmouth</td><td>约 3.5h</td><td>Exmouth</td></tr>
-              <tr><td>D11</td><td>Exmouth ✈ 珀斯</td><td>约 2h 飞行</td><td>离开 / 珀斯</td></tr>
+              <tr><td>D9</td><td>Exmouth → Carnarvon / Geraldton</td><td>3.5h / 7–8h</td><td>过渡夜</td></tr>
+              <tr><td>D10–11</td><td>南返 → 珀斯</td><td>分段 4–6h</td><td>珀斯</td></tr>
             </tbody>
           </table>
+        </div>
+
+        <div class="panel" style="margin-top: 1rem;">
+          <h3>若只有 10 天</h3>
+          <p style="color:var(--muted);font-size:0.95rem;">
+            Kalbarri 压成 1 晚，Exmouth 留 2 晚，南返仍拆 2 天：
+            D1 珀斯 → D2 尖石阵/Geraldton → D3 Kalbarri → D4 Carnarvon → D5–6 Exmouth → D7 南返过渡 → D8 Geraldton → D9 回珀斯 → D10 缓冲离开。
+            会更赶，能 11 天就别压。
+          </p>
         </div>
       </div>
     </section>
@@ -642,7 +649,7 @@
   <footer>
     <div class="wrap">
       <div class="brand">Coral Coast</div>
-      <p>西澳北线行程页 · 鲨鱼湾无房替代方案 · 可离线打开本页查看路线与日程</p>
+      <p>西澳北线 · 开车往返版 · 跳过鲨鱼湾 · 珀斯取还车</p>
     </div>
   </footer>
 
@@ -651,99 +658,80 @@
     const stops = [
       {
         id: "perth",
-        day: "D1",
+        day: "D1 / D11",
         name: "珀斯 Perth",
-        nameEn: "Perth",
         lat: -31.9554,
         lng: 115.8586,
-        stay: "珀斯市区",
-        drive: "落地休整",
+        stay: "首尾住珀斯",
+        drive: "取还车",
         type: "stay",
-        summary: "抵达休整。傍晚 Kings Park 或天鹅河散步，当晚或次日清晨取车。"
+        summary: "抵达休整并取车；行程结束在此还车离开。"
       },
       {
         id: "pinnacles",
         day: "D2",
         name: "尖石阵 Pinnacles",
-        nameEn: "The Pinnacles, Nambung NP",
         lat: -30.6063,
         lng: 115.1602,
-        stay: "途经 · 不住宿",
-        drive: "珀斯出发约 2–2.5h",
+        stay: "途经",
+        drive: "珀斯约 2–2.5h",
         type: "sight",
-        summary: "Nambung 国家公园尖石沙漠。日落光线佳；可顺路看 Lake Thetis（时间紧可跳过）。"
+        summary: "北上必停。日落光线佳；南返也可补拍。"
       },
       {
         id: "geraldton",
-        day: "D2",
+        day: "D2 / D10",
         name: "杰拉尔顿 Geraldton",
-        nameEn: "Geraldton",
         lat: -28.7741,
         lng: 114.6083,
-        stay: "Geraldton / Dongara",
-        drive: "尖石阵再北约 2–3h",
+        stay: "北上 + 南返都可住",
+        drive: "关键枢纽过夜点",
         type: "stay",
-        summary: "尖石阵后继续北上过夜。次日可简单逛海边再前往卡尔巴里。"
+        summary: "北上过夜；南返也可在此拆最后一段回珀斯。"
       },
       {
         id: "kalbarri",
         day: "D3–D4",
         name: "卡尔巴里 Kalbarri",
-        nameEn: "Kalbarri",
         lat: -27.7104,
         lng: 114.1646,
-        stay: "Kalbarri ×2 晚",
+        stay: "建议 2 晚",
         drive: "自 Geraldton 约 1.5–2h",
         type: "stay",
-        summary: "D3 海岸线观景点；D4 Skywalk、Z Bend / Nature’s Window。夏天早出避暑。"
+        summary: "海岸线 + 峡谷 Skywalk。往返版里这里值得住满。"
       },
       {
         id: "carnarvon",
-        day: "D5",
+        day: "D5 / D9",
         name: "卡纳文 Carnarvon",
-        nameEn: "Carnarvon",
         lat: -24.8801,
         lng: 113.6589,
-        stay: "Carnarvon（过渡）",
-        drive: "自 Kalbarri 约 4.5h",
+        stay: "北上过渡 · 南返过渡",
+        drive: "拆超长车程",
         type: "stay",
-        summary: "拆开超长车程的过渡夜。订不到可改 Coral Bay，或次日一鼓作气开到 Exmouth。"
+        summary: "往返都建议在此或附近拆夜。订不到可试 Coral Bay。"
       },
       {
         id: "exmouth",
-        day: "D6–D9",
+        day: "D6–D8",
         name: "Exmouth / 宁格鲁",
-        nameEn: "Exmouth",
         lat: -21.9317,
         lng: 114.1205,
-        stay: "Exmouth ×3–4 晚",
+        stay: "2–3 晚",
         drive: "自 Carnarvon 约 3.5h",
         type: "stay",
-        summary: "北线核心。安顿后去 Vlamingh Head 看日落，后续安排浮潜与国家公园。"
+        summary: "往返版核心玩乐段：浮潜、灯塔日落、Cape Range。"
       },
       {
         id: "turquoise",
         day: "D7–D8",
         name: "Turquoise Bay",
-        nameEn: "Turquoise Bay",
         lat: -22.0314,
         lng: 113.9325,
         stay: "仍住 Exmouth",
         drive: "镇区约 45–60 分钟",
         type: "sight",
-        summary: "宁格鲁经典浮潜点。注意海流方向；可另排船潜或查潮汐去 Oyster Stacks。"
-      },
-      {
-        id: "flight",
-        day: "D10–D11",
-        name: "飞回珀斯",
-        nameEn: "Exmouth → Perth flight",
-        lat: -22.2356,
-        lng: 114.0886,
-        stay: "珀斯 / 离开",
-        drive: "飞行约 2h",
-        type: "flight",
-        summary: "Exmouth 还车，飞回珀斯衔接离开航班。建议预留充足转机时间。"
+        summary: "宁格鲁经典浮潜点。注意海流；可另排船或查潮汐去 Oyster Stacks。"
       }
     ];
 
@@ -752,130 +740,169 @@
         key: "d1",
         stopId: "perth",
         label: "01",
-        title: "抵达珀斯",
-        body: "休整、采买路上水和零食。傍晚 Kings Park 或河边走走。",
+        title: "抵达珀斯 · 取车",
+        body: "休整、买水和零食。傍晚 Kings Park 或河边走走。建议当晚或次日清晨取车。",
         stay: "珀斯",
-        drive: "无长途"
+        drive: "市区短途",
+        leg: "north"
       },
       {
         key: "d2",
         stopId: "pinnacles",
         label: "02",
         title: "尖石阵 → Geraldton",
-        body: "珀斯出发前往 Nambung 尖石阵，下午/傍晚继续北上过夜。",
+        body: "北上第一长途日。逛 Nambung 尖石阵后继续开往 Geraldton / Dongara 过夜。",
         stay: "Geraldton 或 Dongara",
-        drive: "合计约 5h+"
+        drive: "合计约 5h+",
+        leg: "north"
       },
       {
         key: "d3",
         stopId: "kalbarri",
         label: "03",
-        title: "抵达卡尔巴里 · 海岸线",
-        body: "开往 Kalbarri。下午走 Natural Bridge、Island Rock 等海岸观景点，看悬崖日落。",
+        title: "卡尔巴里 · 海岸线",
+        body: "开往 Kalbarri。下午 Natural Bridge、Island Rock 等观景点，看悬崖日落。",
         stay: "Kalbarri",
-        drive: "约 1.5–2h"
+        drive: "约 1.5–2h",
+        leg: "north"
       },
       {
         key: "d4",
         stopId: "kalbarri",
         label: "04",
-        title: "卡尔巴里峡谷日",
-        body: "Skywalk + Z Bend / Nature’s Window（选 1–2 条）。中午回镇避暑，下午补海岸线。",
+        title: "卡尔巴里 · 峡谷日",
+        body: "Skywalk + Z Bend / Nature’s Window。中午回镇避暑。这天几乎不赶路，养精神给后面长途。",
         stay: "Kalbarri",
-        drive: "园区短途"
+        drive: "园区短途",
+        leg: "north"
       },
       {
         key: "d5",
         stopId: "carnarvon",
         label: "05",
-        title: "北上过渡夜",
-        body: "离开 Kalbarri，开往 Carnarvon 拆车程。若无房：Coral Bay，或隔日直开 Exmouth。",
-        stay: "Carnarvon / 备选 Coral Bay",
-        drive: "约 4.5h"
+        title: "北上过渡 · Carnarvon",
+        body: "Kalbarri 出发，开到 Carnarvon 过夜。订不到可改 Coral Bay（更靠海，房紧）。",
+        stay: "Carnarvon / Coral Bay",
+        drive: "约 4.5h",
+        leg: "north"
       },
       {
         key: "d6",
         stopId: "exmouth",
         label: "06",
         title: "抵达 Exmouth",
-        body: "上午到镇安顿。下午 Vlamingh Head 灯塔日落，或 Town Beach 适应海水。",
+        body: "上午到镇安顿。下午 Vlamingh Head 灯塔看日落，或先适应海水。",
         stay: "Exmouth",
-        drive: "约 3.5h"
+        drive: "约 3.5h",
+        leg: "north"
       },
       {
         key: "d7",
         stopId: "turquoise",
         label: "07",
         title: "宁格鲁浮潜日",
-        body: "Turquoise Bay 浮潜（遵从当地水流提示），或报浮潜/船团。鲸鲨季优先订船。",
+        body: "Turquoise Bay 浮潜（注意水流方向），或报浮潜/船团。鲸鲨季优先订船。",
         stay: "Exmouth",
-        drive: "往返约 2h"
+        drive: "往返约 2h",
+        leg: "north"
       },
       {
         key: "d8",
-        stopId: "turquoise",
+        stopId: "exmouth",
         label: "08",
-        title: "再潜一天 / Cape Range",
-        body: "第二次浮潜，或 Mandu Mandu 等步道。运气好可见海龟。",
+        title: "再玩一天 / 缓节奏",
+        body: "第二次浮潜或 Cape Range 步道。若只有 10 天，这晚可改为开始南返。",
         stay: "Exmouth",
-        drive: "短途"
+        drive: "短途",
+        leg: "north"
       },
       {
         key: "d9",
-        stopId: "exmouth",
+        stopId: "carnarvon",
         label: "09",
-        title: "缓节奏补漏",
-        body: "自由活动、补之前没去的点，整理行李并确认次日航班。",
-        stay: "Exmouth",
-        drive: "随意"
+        title: "开始南返",
+        body: "离开 Exmouth。建议开到 Carnarvon；体力好可到 Coral Bay 后再南下，但不要硬开回 Geraldton 以上。",
+        stay: "Carnarvon（或 Coral Bay）",
+        drive: "约 3.5h+",
+        leg: "return"
       },
       {
         key: "d10",
-        stopId: "flight",
+        stopId: "geraldton",
         label: "10",
-        title: "飞回珀斯",
-        body: "还车 + Exmouth → 珀斯航班。可当晚离开，或在珀斯再住一晚。",
-        stay: "珀斯或离境",
-        drive: "飞行约 2h"
+        title: "南返中段",
+        body: "继续南下到 Geraldton / Dongara。可在 Kalbarri 稍作休息但不一定再住（看当天出发早晚）。",
+        stay: "Geraldton / Dongara",
+        drive: "约 4.5–6h",
+        leg: "return"
       },
       {
         key: "d11",
         stopId: "perth",
         label: "11",
-        title: "缓冲离开日",
-        body: "11 天版缓冲：上午 Swan Valley / 海滩，或直接机场。也可把这天并进宁格鲁多住一晚。",
-        stay: "离开",
-        drive: "无"
+        title: "开回珀斯 · 还车",
+        body: "最后一段回珀斯，可顺路补尖石阵。下午还车，晚上离开或再住一晚缓冲。",
+        stay: "珀斯 / 离开",
+        drive: "约 4–5h",
+        leg: "return"
       }
     ];
 
-    const gmapsUrl =
+    const northWaypoints = [
+      "The Pinnacles, Nambung National Park WA",
+      "Geraldton WA",
+      "Kalbarri WA",
+      "Carnarvon WA"
+    ];
+
+    const gmapsNorth =
       "https://www.google.com/maps/dir/?api=1&origin=" +
       encodeURIComponent("Perth WA, Australia") +
       "&destination=" +
       encodeURIComponent("Exmouth WA, Australia") +
+      "&waypoints=" + encodeURIComponent(northWaypoints.join("|")) +
+      "&travelmode=driving";
+
+    const gmapsSouth =
+      "https://www.google.com/maps/dir/?api=1&origin=" +
+      encodeURIComponent("Exmouth WA, Australia") +
+      "&destination=" +
+      encodeURIComponent("Perth WA, Australia") +
+      "&waypoints=" +
+      encodeURIComponent(["Carnarvon WA", "Geraldton WA"].join("|")) +
+      "&travelmode=driving";
+
+    const gmapsRound =
+      "https://www.google.com/maps/dir/?api=1&origin=" +
+      encodeURIComponent("Perth WA, Australia") +
+      "&destination=" +
+      encodeURIComponent("Perth WA, Australia") +
       "&waypoints=" +
       encodeURIComponent(
         [
           "The Pinnacles, Nambung National Park WA",
           "Geraldton WA",
           "Kalbarri WA",
-          "Carnarvon WA"
+          "Carnarvon WA",
+          "Exmouth WA",
+          "Carnarvon WA",
+          "Geraldton WA"
         ].join("|")
       ) +
       "&travelmode=driving";
 
-    ["open-gmaps", "open-gmaps-2", "open-gmaps-3"].forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) el.href = gmapsUrl;
-    });
+    document.getElementById("open-gmaps").href = gmapsRound;
+    document.getElementById("open-gmaps-2").href = gmapsRound;
+    document.getElementById("open-gmaps-3").href = gmapsRound;
+    document.getElementById("open-gmaps-north").href = gmapsNorth;
+    document.getElementById("open-gmaps-south").href = gmapsSouth;
 
     const timeline = document.getElementById("timeline");
     timeline.innerHTML = days
       .map(
         (d) => `
-      <article class="day" id="${d.key}" data-stop="${d.stopId}">
-        <div class="day-num">${d.label}<small>Day</small></div>
+      <article class="day ${d.leg === "return" ? "leg-return" : ""}" id="${d.key}" data-stop="${d.stopId}">
+        <div class="day-num">${d.label}<small>${d.leg === "return" ? "Return" : "Day"}</small></div>
         <div>
           <h3>${d.title}</h3>
           <p>${d.body}</p>
@@ -894,15 +921,11 @@
     });
 
     L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
-      attribution: '&copy; OpenStreetMap &copy; CARTO',
+      attribution: "&copy; OpenStreetMap &copy; CARTO",
       maxZoom: 18
     }).addTo(map);
 
-    const colors = {
-      stay: "#0b4f6c",
-      sight: "#1a7a6d",
-      flight: "#c45c3e"
-    };
+    const colors = { stay: "#0b4f6c", sight: "#1a7a6d" };
 
     function markerIcon(type) {
       const color = colors[type] || colors.stay;
@@ -911,40 +934,37 @@
         iconSize: [28, 28],
         iconAnchor: [14, 14],
         popupAnchor: [0, -12],
-        html: `<div style="
-          width:28px;height:28px;border-radius:50%;
-          background:${color};border:3px solid #fff;
-          box-shadow:0 6px 16px rgba(7,58,80,.35);
-        "></div>`
+        html: `<div style="width:28px;height:28px;border-radius:50%;background:${color};border:3px solid #fff;box-shadow:0 6px 16px rgba(7,58,80,.35);"></div>`
       });
     }
 
-    const driveStops = stops.filter((s) => s.type !== "flight" && s.id !== "turquoise");
-    const driveLatLngs = driveStops.map((s) => [s.lat, s.lng]);
+    const outboundIds = ["perth", "pinnacles", "geraldton", "kalbarri", "carnarvon", "exmouth"];
+    const outbound = outboundIds.map((id) => stops.find((s) => s.id === id));
+    const outboundLatLngs = outbound.map((s) => [s.lat, s.lng]);
 
-    const routeLine = L.polyline(driveLatLngs, {
+    // Offset return line slightly east so both directions are visible
+    const returnIds = ["exmouth", "carnarvon", "geraldton", "perth"];
+    const returnLatLngs = returnIds.map((id) => {
+      const s = stops.find((x) => x.id === id);
+      return [s.lat, s.lng + 0.35];
+    });
+
+    L.polyline(outboundLatLngs, {
       color: "#0b4f6c",
       weight: 4,
-      opacity: 0.85,
-      dashArray: null,
+      opacity: 0.9,
       lineJoin: "round"
     }).addTo(map);
 
-    const flightLine = L.polyline(
-      [
-        [stops.find((s) => s.id === "exmouth").lat, stops.find((s) => s.id === "exmouth").lng],
-        [stops.find((s) => s.id === "perth").lat, stops.find((s) => s.id === "perth").lng]
-      ],
-      {
-        color: "#c45c3e",
-        weight: 3,
-        opacity: 0.75,
-        dashArray: "8 10"
-      }
-    ).addTo(map);
+    L.polyline(returnLatLngs, {
+      color: "#c45c3e",
+      weight: 3.5,
+      opacity: 0.85,
+      dashArray: "10 10",
+      lineJoin: "round"
+    }).addTo(map);
 
     const markerById = {};
-
     stops.forEach((s) => {
       const marker = L.marker([s.lat, s.lng], { icon: markerIcon(s.type) }).addTo(map);
       marker.bindPopup(`
@@ -958,7 +978,7 @@
     });
 
     function fitRoute() {
-      const bounds = L.latLngBounds(driveLatLngs);
+      const bounds = L.latLngBounds(outboundLatLngs.concat(returnLatLngs));
       map.fitBounds(bounds.pad(0.12));
     }
 
