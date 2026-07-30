@@ -11,7 +11,7 @@
 | 卡尔巴里折返（原版） | 约 1,150 km | 约 2.5h | 最省力，彻底放松 |
 | 卡尔巴里 + 西南 | 约 1,800 km | 约 3.5h | 南北都想看一点 |
 | Exmouth 自驾往返 | 约 2,500 km | 约 7h | 必须浮潜且不介意长途 |
-| Exmouth 飞去飞回 | 约 700 km + 机票 | 约 3h | 想去宁格鲁但不愿独自开长途 |
+| 北线单程 + Exmouth 飞回 | 约 1,250 km + 机票 | 约 4.5h | 想看完整北线又不走回头路 |
 
 ### 1. 卡尔巴里折返（原版）
 
@@ -27,9 +27,12 @@
 Geraldton → Kalbarri → Carnarvon → Exmouth ×3 → Coral Bay → Cervantes。
 10/4 需连开约 7 小时，单人驾驶请谨慎。
 
-### 4. Exmouth 飞去飞回 + 西南自驾
+### 4. 北线单程自驾 + Exmouth 飞回
 
-9/27 飞 Learmonth，宁格鲁住 4 晚；10/1 飞回珀斯后自驾玛格丽特河 3 晚。
+一路向北开完整北线：尖石阵 → Geraldton → Kalbarri ×2 → Carnarvon → Coral Bay → Exmouth ×2，
+10/5 在 Learmonth 机场还车飞回珀斯，不走回头路。
+
+注意：需确认**异地还车**（珀斯取 / Exmouth 还）的附加费，并订上午或中午的航班。
 
 ## GitHub Pages
 

@@ -566,7 +566,7 @@
       <div class="hero-copy">
         <div style="letter-spacing:0.14em;text-transform:uppercase;font-size:0.78rem;font-weight:700;color:#b8e0d6;">2026.9.26 早到珀斯 · 10.6 00:16 离开 · 单人自驾</div>
         <h1>西澳 10 日<br /><em>四个方案</em>随时切换</h1>
-        <p>卡尔巴里折返、卡尔巴里 + 西南、Exmouth 自驾往返、Exmouth 飞去飞回。地图、日程、车程表都会跟着切换。</p>
+        <p>卡尔巴里折返、卡尔巴里 + 西南、Exmouth 自驾往返、北线单程自驾 + Exmouth 飞回。地图、日程、车程表都会跟着切换。</p>
         <div class="cta-row">
           <a class="btn btn-primary" href="#map">对比四个方案</a>
           <a class="btn btn-ghost" id="open-gmaps" href="#" target="_blank" rel="noopener">在 Google 地图打开</a>
@@ -588,7 +588,7 @@
           <button class="plan-tab" role="tab" data-plan="kalbarri" aria-selected="true">卡尔巴里折返<small>最轻松 · 原版</small></button>
           <button class="plan-tab" role="tab" data-plan="kalbarri-south" aria-selected="false">卡尔巴里 + 西南<small>北线 + 南线</small></button>
           <button class="plan-tab" role="tab" data-plan="exmouth-drive" aria-selected="false">Exmouth 自驾往返<small>最硬核</small></button>
-          <button class="plan-tab" role="tab" data-plan="exmouth-fly" aria-selected="false">Exmouth 飞去飞回<small>飞北 + 开南</small></button>
+          <button class="plan-tab" role="tab" data-plan="exmouth-fly" aria-selected="false">北线单程 + 飞回<small>开过去 · 飞回来</small></button>
         </div>
 
         <div class="plan-stats" id="plan-stats"></div>
@@ -692,7 +692,7 @@
               <tr><td>卡尔巴里折返</td><td>约 1,150 km</td><td>约 2.5h</td><td>最省力，想彻底放松</td></tr>
               <tr><td>卡尔巴里 + 西南</td><td>约 1,800 km</td><td>约 3.5h</td><td>想南北都看一点</td></tr>
               <tr><td>Exmouth 自驾往返</td><td>约 2,500 km</td><td>约 7h</td><td>必须浮潜且不介意长途</td></tr>
-              <tr><td>Exmouth 飞去飞回</td><td>约 700 km + 机票</td><td>约 3h</td><td>想去宁格鲁但不想独自开长途</td></tr>
+              <tr><td>北线单程 + Exmouth 飞回</td><td>约 1,250 km + 机票</td><td>约 4.5h</td><td>想看完整北线又不想开回头路</td></tr>
             </tbody>
           </table>
         </div>
@@ -914,54 +914,57 @@
       },
 
       "exmouth-fly": {
-        title: "Exmouth 飞去飞回 + 西南自驾",
-        tagline: "北段坐飞机、当地租小车，南段自己开去玛格丽特河，长途独驾降到最低。",
+        title: "北线单程自驾 + Exmouth 飞回",
+        tagline: "一路向北开到宁格鲁，不走回头路；Exmouth 还车后飞回珀斯，省掉最累的南返段。",
         stats: [
-          { v: "约 700 km", k: "自驾里程" },
-          { v: "约 3h", k: "最长单日车程" },
-          { v: "4 晚", k: "Exmouth" },
-          { v: "2 段", k: "珀斯往返航班" }
+          { v: "约 1,250 km", k: "自驾（单程）" },
+          { v: "约 4.5h", k: "最长单日车程" },
+          { v: "2 晚 + 1 晚", k: "Exmouth / Coral Bay" },
+          { v: "1 段", k: "回程航班 + 异地还车" }
         ],
-        chips: ["9/26 珀斯", "9/27 飞 Exmouth", "9/28–30 宁格鲁", "10/1 飞回珀斯", "10/2–3 玛格丽特河", "10/4 西南收尾", "10/5 回珀斯"],
-        callout: "<strong>既能浮潜又不用独自开长途。</strong>珀斯往返飞 Exmouth（Learmonth 机场），当地租小车只跑短途；回珀斯后再取自驾车南下玛格丽特河。代价是多一笔机票与当地租车费用。",
+        chips: ["9/26 珀斯", "9/27 尖石阵", "9/28 Geraldton", "9/29–30 Kalbarri ×2", "10/1 Carnarvon", "10/2 Coral Bay", "10/3–4 Exmouth ×2", "10/5 飞回珀斯"],
+        callout: "<strong>只走北线、不折返。</strong>沿途每个点都是新风景，最后在 Exmouth 还车飞回珀斯，避免 1,250 km 的重复南返。需要确认<strong>异地还车费</strong>与 Learmonth 机场航班时刻。",
         warn: false,
-        outbound: ["perth", "busselton", "margaret"],
+        outbound: ["perth", "cervantes", "geraldton", "huttlagoon", "kalbarri", "carnarvon", "coralbay", "exmouth"],
         back: ["exmouth", "perth"],
         flight: true,
-        extra: ["turquoise", "coralbay", "fremantle"],
+        extra: ["pinnacles", "lancelin", "kalbarrinp", "turquoise"],
         gmaps: {
-          all: gmapsUrl("Perth WA, Australia", "Perth WA, Australia", ["Busselton WA", "Margaret River WA", "Bunbury WA"]),
-          out: gmapsUrl("Perth WA, Australia", "Margaret River WA, Australia", ["Busselton WA"]),
-          ret: gmapsUrl("Margaret River WA, Australia", "Perth WA, Australia", ["Bunbury WA"]),
-          embed: embedUrl("Perth WA", "Margaret River WA", ["Busselton WA"])
+          all: gmapsUrl("Perth WA, Australia", "Exmouth WA, Australia", ["Cervantes WA", "Geraldton WA", "Hutt Lagoon Port Gregory WA", "Kalbarri WA", "Carnarvon WA", "Coral Bay WA"]),
+          out: gmapsUrl("Perth WA, Australia", "Kalbarri WA, Australia", ["Cervantes WA", "Geraldton WA", "Hutt Lagoon Port Gregory WA"]),
+          ret: gmapsUrl("Kalbarri WA, Australia", "Exmouth WA, Australia", ["Carnarvon WA", "Coral Bay WA"]),
+          embed: embedUrl("Perth WA", "Exmouth WA", ["Cervantes WA", "Geraldton WA", "Kalbarri WA", "Carnarvon WA", "Coral Bay WA"])
         },
         notes: [
-          "9/27 飞 Learmonth（Exmouth）机场，当地租小车",
-          "宁格鲁住 4 晚，浮潜、Cape Range 都很从容",
-          "10/1 飞回珀斯当天不安排长途驾驶",
-          "南段自驾最长约 3h，全程柏油路",
-          "需额外预算：往返机票 + Exmouth 当地租车"
+          "全程单向北上，没有一天是重复路段",
+          "10/1 Kalbarri → Carnarvon 约 4.5h，是唯一的长途日",
+          "10/5 只坐飞机，不开长途，赶红眼航班压力小",
+          "务必先确认异地还车（Perth 取 / Exmouth 还）的附加费与可行性",
+          "Learmonth 机场班次少，订上午或中午飞珀斯的航班，留足衔接时间"
         ],
         days: [
-          { d: "26", date: "9月26日 周六", at: "perth", t: "抵达珀斯 · 休整", b: "早上落地补眠。今天不取车，傍晚 Kings Park 或河边散步，确认次日航班。", stay: "珀斯", drive: "市区公交 / 步行", leg: "out" },
-          { d: "27", date: "9月27日 周日", at: "exmouth", t: "飞 Exmouth · 当地取车", b: "珀斯飞 Learmonth 约 2h，机场取小车约 40 分钟到镇上。傍晚 Vlamingh Head 灯塔看日落。", stay: "Exmouth 第 1 晚", drive: "航班 + 约 40 分钟", leg: "fly" },
-          { d: "28", date: "9月28日 周一", at: "turquoise", t: "宁格鲁浮潜日", b: "Turquoise Bay 浮潜（注意水流方向）。全天在 Cape Range 国家公园。", stay: "Exmouth 第 2 晚", drive: "往返约 2h", leg: "out" },
-          { d: "29", date: "9月29日 周二", at: "exmouth", t: "船团 / Cape Range", b: "报浮潜或观光船团，或走 Mandu Mandu 步道，碰运气看海龟。", stay: "Exmouth 第 3 晚", drive: "短途", leg: "out" },
-          { d: "30", date: "9月30日 周三", at: "coralbay", t: "Coral Bay 一日往返（可选）", b: "南下 Coral Bay 约 1.5h，浅滩浮潜后返回；不想开车就留在 Exmouth 再潜一次。", stay: "Exmouth 第 4 晚", drive: "往返约 3h 或全休", leg: "out" },
-          { d: "01", date: "10月1日 周四", at: "perth", t: "飞回珀斯 · 取自驾车", b: "还掉当地小车，飞回珀斯。下午取自驾车，逛 Fremantle 或市区，今天不开长途。", stay: "珀斯", drive: "航班 + 市区短途", leg: "fly" },
-          { d: "02", date: "10月2日 周五", at: "margaret", t: "南下 · Busselton → 玛格丽特河", b: "南下途中停 Busselton 长栈桥。下午到 Margaret River 入住。", stay: "玛格丽特河 第 1 晚", drive: "约 3h", leg: "back" },
-          { d: "03", date: "10月3日 周六", at: "margaret", t: "玛格丽特河 · 酒庄与海滩", b: "上午 Prevelly / Gnarabup 海滩，中午酒庄午餐，下午再选一家精品酒庄。", stay: "玛格丽特河 第 2 晚", drive: "区域短途", leg: "back" },
-          { d: "04", date: "10月4日 周日", at: "margaret", t: "洞穴或灯塔 · 西南收尾", b: "Mammoth / Lake Cave 二选一，或南下 Augusta 看 Cape Leeuwin 灯塔。傍晚回镇。", stay: "玛格丽特河 第 3 晚", drive: "区域短途", leg: "back" },
-          { d: "05", date: "10月5日 周一", at: "perth", t: "回珀斯 · 还车", b: "上午出发回珀斯（约 3h），可停 Bunbury。下午还车、吃饭休整，约 21:00 去机场。", stay: "赶飞机", drive: "约 3h", leg: "back" }
+          { d: "26", date: "9月26日 周六", at: "perth", t: "抵达珀斯 · 取车", b: "早上落地补眠。下午取车，确认合同上写明 Exmouth 还车。采买路上补给。", stay: "珀斯", drive: "市区短途", leg: "out" },
+          { d: "27", date: "9月27日 周日", at: "cervantes", t: "海岸公路 → 尖石阵 → Cervantes", b: "走 Indian Ocean Drive 北上，可停 Lancelin 沙丘。傍晚看尖石阵，就近住 Cervantes 或 Jurien Bay。", stay: "Cervantes / Jurien Bay", drive: "约 2.5h", leg: "out" },
+          { d: "28", date: "9月28日 周一", at: "geraldton", t: "→ Dongara → Geraldton", b: "沿海北上，中途 Dongara 停下吃饭走走。下午到 Geraldton 安顿，逛海边。", stay: "Geraldton", drive: "约 3h", leg: "out" },
+          { d: "29", date: "9月29日 周二", at: "kalbarri", t: "粉红湖 → 卡尔巴里", b: "经 Port Gregory 停 Hutt Lagoon 粉红湖拍照。下午到 Kalbarri，走海岸悬崖看日落。", stay: "Kalbarri 第 1 晚", drive: "约 2.5h", leg: "out" },
+          { d: "30", date: "9月30日 周三", at: "kalbarrinp", t: "卡尔巴里峡谷日", b: "清晨进国家公园：Skywalk、Nature’s Window，体力够可加 Z Bend。中午前回镇休息，为明天长途养神。", stay: "Kalbarri 第 2 晚", drive: "园区往返约 1.5h", leg: "out" },
+          { d: "01", date: "10月1日 周四", at: "carnarvon", t: "唯一长途日 · Carnarvon", b: "北上约 4.5h 到 Carnarvon。今天以赶路为主，早发、多停车休息，傍晚小镇简单逛逛。", stay: "Carnarvon", drive: "约 4.5h", leg: "out" },
+          { d: "02", date: "10月2日 周五", at: "coralbay", t: "Coral Bay 浮潜", b: "车程只有约 2.5h，中午前就能到。下午直接岸潜或参加浅滩浮潜，傍晚海边散步。", stay: "Coral Bay", drive: "约 2.5h", leg: "out" },
+          { d: "03", date: "10月3日 周六", at: "exmouth", t: "抵达 Exmouth", b: "北上约 1.5h 到 Exmouth，是全程最轻松的一段。下午安顿，傍晚 Vlamingh Head 灯塔看日落。", stay: "Exmouth 第 1 晚", drive: "约 1.5h", leg: "out" },
+          { d: "04", date: "10月4日 周日", at: "turquoise", t: "宁格鲁浮潜日", b: "Turquoise Bay 浮潜（注意水流方向），或走 Cape Range 的 Mandu Mandu 步道。傍晚把行李收好、加满油。", stay: "Exmouth 第 2 晚", drive: "往返约 2h", leg: "out" },
+          { d: "05", date: "10月5日 周一", at: "perth", t: "Exmouth 还车 · 飞回珀斯", b: "上午在 Learmonth 机场还车，飞回珀斯约 2h。下午在珀斯吃饭休整，约 21:00 前往机场赶 10/6 00:16。今天完全不用开长途。", stay: "赶飞机", drive: "航班约 2h", leg: "fly" }
         ],
         table: [
-          ["9/26", "抵达珀斯（不取车）", "—", "珀斯"],
-          ["9/27", "飞 Learmonth → Exmouth", "航班约 2h", "Exmouth"],
-          ["9/28–30", "宁格鲁浮潜 / Coral Bay", "当地短途", "Exmouth ×4"],
-          ["10/1", "飞回珀斯 · 取自驾车", "航班约 2h", "珀斯"],
-          ["10/2", "→ Busselton → 玛格丽特河", "约 3h", "玛格丽特河"],
-          ["10/3–4", "酒庄 / 海滩 / 洞穴", "区域短途", "玛格丽特河"],
-          ["10/5", "→ 珀斯 → 机场", "约 3h", "赶 00:16"]
+          ["9/26", "抵达珀斯 · 取车", "—", "珀斯"],
+          ["9/27", "珀斯 → 尖石阵 → Cervantes", "约 2.5h", "Cervantes"],
+          ["9/28", "→ Geraldton", "约 3h", "Geraldton"],
+          ["9/29", "→ 粉红湖 → Kalbarri", "约 2.5h", "Kalbarri"],
+          ["9/30", "卡尔巴里峡谷", "园区短途", "Kalbarri"],
+          ["10/1", "Kalbarri → Carnarvon", "约 4.5h", "Carnarvon"],
+          ["10/2", "→ Coral Bay 浮潜", "约 2.5h", "Coral Bay"],
+          ["10/3", "→ Exmouth", "约 1.5h", "Exmouth"],
+          ["10/4", "宁格鲁浮潜", "往返约 2h", "Exmouth"],
+          ["10/5", "Exmouth 还车 → 飞珀斯", "航班约 2h", "赶 00:16"]
         ]
       }
     };
