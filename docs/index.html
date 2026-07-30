@@ -690,7 +690,7 @@
             </thead>
             <tbody>
               <tr><td>卡尔巴里折返</td><td>约 1,150 km</td><td>约 2.5h</td><td>最省力，想彻底放松</td></tr>
-              <tr><td>卡尔巴里 + 西南</td><td>约 1,800 km</td><td>约 3.5h</td><td>想南北都看一点</td></tr>
+              <tr><td>卡尔巴里 + 西南</td><td>约 1,750 km</td><td>约 4.5h</td><td>南北都看，还想撸微笑袋鼠</td></tr>
               <tr><td>Exmouth 自驾往返</td><td>约 2,500 km</td><td>约 7h</td><td>必须浮潜且不介意长途</td></tr>
               <tr><td>北线单程 + Exmouth 飞回</td><td>约 1,250 km + 机票</td><td>约 4.5h</td><td>想看完整北线又不想开回头路</td></tr>
             </tbody>
@@ -720,13 +720,13 @@
     const PLACES = {
       perth: { name: "珀斯 Perth", lat: -31.9554, lng: 115.8586, type: "stay" },
       fremantle: { name: "弗里曼特尔 Fremantle", lat: -32.0569, lng: 115.7439, type: "sight" },
+      rottnest: { name: "罗特尼斯岛 Rottnest（微笑袋鼠）", lat: -32.0064, lng: 115.515, type: "sight" },
       lancelin: { name: "Lancelin 沙丘", lat: -31.0167, lng: 115.3333, type: "sight" },
       pinnacles: { name: "尖石阵 Pinnacles", lat: -30.6063, lng: 115.1602, type: "sight" },
       cervantes: { name: "Cervantes", lat: -30.4992, lng: 115.0647, type: "stay" },
       jurien: { name: "Jurien Bay", lat: -30.305, lng: 115.04, type: "stay" },
       dongara: { name: "Dongara / Port Denison", lat: -29.25, lng: 114.9333, type: "stay" },
       geraldton: { name: "杰拉尔顿 Geraldton", lat: -28.7741, lng: 114.6083, type: "stay" },
-      coalseam: { name: "Coalseam 野花保护区", lat: -29.0167, lng: 115.5333, type: "sight" },
       huttlagoon: { name: "Hutt Lagoon 粉红湖", lat: -28.0692, lng: 114.1984, type: "sight" },
       kalbarri: { name: "卡尔巴里 Kalbarri", lat: -27.7104, lng: 114.1646, type: "stay" },
       kalbarrinp: { name: "Kalbarri 峡谷 / Skywalk", lat: -27.575, lng: 114.455, type: "sight" },
@@ -764,11 +764,11 @@
           { v: "0", k: "航班 / 异地还车" }
         ],
         chips: ["9/26 珀斯", "9/27 尖石阵", "9/28–29 Geraldton ×2", "9/30–10/2 Kalbarri ×3", "10/3 Dongara", "10/4 Cervantes", "10/5 回珀斯"],
-        callout: "<strong>最省力的版本。</strong>9/29 是完全弹性日，累了可以整天不开车；10/4 住 Cervantes 离珀斯只剩 2.5h，几乎没有误机风险。9 月底正逢野花季。",
+        callout: "<strong>最省力的版本。</strong>9/29 是完全弹性日，累了可以整天不开车；10/4 住 Cervantes 离珀斯只剩 2.5h，几乎没有误机风险。",
         warn: false,
         outbound: ["perth", "cervantes", "jurien", "dongara", "geraldton", "huttlagoon", "kalbarri"],
         back: ["kalbarri", "geraldton", "dongara", "cervantes", "perth"],
-        extra: ["lancelin", "pinnacles", "coalseam", "kalbarrinp"],
+        extra: ["lancelin", "pinnacles", "kalbarrinp"],
         gmaps: {
           all: gmapsUrl("Perth WA, Australia", "Perth WA, Australia", ["Cervantes WA", "Jurien Bay WA", "Geraldton WA", "Hutt Lagoon Port Gregory WA", "Kalbarri WA", "Dongara WA", "Lancelin WA"]),
           out: gmapsUrl("Perth WA, Australia", "Kalbarri WA, Australia", ["Cervantes WA", "Jurien Bay WA", "Geraldton WA", "Hutt Lagoon Port Gregory WA"]),
@@ -777,7 +777,7 @@
         },
         notes: [
           "每段车程 1.5–2.5h，几乎没有硬赶路日",
-          "9/29 弹性日：野花、Abrolhos 观光飞行或全休",
+          "9/29 弹性日：Abrolhos 观光飞行、海边闲逛或整天不开车",
           "Kalbarri 住 3 晚，海岸与峡谷分开走",
           "10/4 尖石阵放傍晚，光影最好",
           "10/5 只开 2.5h，从容还车赶航班"
@@ -786,7 +786,7 @@
           { d: "26", date: "9月26日 周六", at: "perth", t: "抵达珀斯 · 休整取车", b: "早上落地先补眠。下午取车，在市区附近熟悉左侧行驶，顺便买水、零食和防晒。", stay: "珀斯", drive: "市区短途", leg: "out" },
           { d: "27", date: "9月27日 周日", at: "jurien", t: "海岸公路 → 尖石阵 → Jurien Bay", b: "走 Indian Ocean Drive 北上，可停 Lancelin 沙丘。下午逛尖石阵，傍晚住 Jurien Bay 或 Cervantes。", stay: "Jurien Bay / Cervantes", drive: "约 2.5h", leg: "out" },
           { d: "28", date: "9月28日 周一", at: "geraldton", t: "→ Dongara → Geraldton", b: "沿海北上，中途在 Dongara / Port Denison 停下吃饭走走。下午到 Geraldton 安顿。", stay: "Geraldton 第 1 晚", drive: "约 2.5h", leg: "out" },
-          { d: "29", date: "9月29日 周二", at: "coalseam", t: "野花日 / 弹性休息日", b: "去 Coalseam 或 Mullewa 一带看野花（单程约 1.5h）。不想动就留在 Geraldton 休息，或加订 Abrolhos 观光飞行。", stay: "Geraldton 第 2 晚", drive: "短途往返或全休", leg: "out" },
+          { d: "29", date: "9月29日 周二", at: "geraldton", t: "Geraldton 弹性休息日", b: "完全不赶路的一天：海滨步道、灯塔与纪念馆，或加订 Abrolhos 群岛观光飞行。想彻底休息就整天不开车。", stay: "Geraldton 第 2 晚", drive: "短途或全休", leg: "out" },
           { d: "30", date: "9月30日 周三", at: "kalbarri", t: "粉红湖 → 卡尔巴里", b: "经 Northampton 转往 Port Gregory，停 Hutt Lagoon 粉红湖拍照，下午到 Kalbarri 入住。", stay: "Kalbarri 第 1 晚", drive: "约 2.5h", leg: "out" },
           { d: "01", date: "10月1日 周四", at: "kalbarri", t: "卡尔巴里海岸线", b: "Natural Bridge、Island Rock、Eagle Gorge 等悬崖观景点一路短停。下午镇上休息。", stay: "Kalbarri 第 2 晚", drive: "镇区短途", leg: "out" },
           { d: "02", date: "10月2日 周五", at: "kalbarrinp", t: "峡谷与 Skywalk", b: "清晨进国家公园：Skywalk、Nature’s Window，体力够可加 Z Bend。中午前回镇避晒。", stay: "Kalbarri 第 3 晚", drive: "园区往返约 1.5h", leg: "out" },
@@ -798,7 +798,7 @@
           ["9/26", "抵达珀斯", "—", "珀斯"],
           ["9/27", "珀斯 → 尖石阵 → Jurien Bay", "约 2.5h", "Jurien Bay"],
           ["9/28", "→ Dongara → Geraldton", "约 2.5h", "Geraldton"],
-          ["9/29", "野花 / 弹性日", "短途往返", "Geraldton"],
+          ["9/29", "Geraldton 弹性日", "短途或全休", "Geraldton"],
           ["9/30", "→ 粉红湖 → Kalbarri", "约 2.5h", "Kalbarri"],
           ["10/1–2", "卡尔巴里海岸 + 峡谷", "园区短途", "Kalbarri"],
           ["10/3", "Kalbarri → Dongara", "约 2.5h", "Dongara"],
@@ -809,19 +809,19 @@
 
       "kalbarri-south": {
         title: "卡尔巴里 + 西南线",
-        tagline: "北线压到 5 天，后半段折回珀斯南下玛格丽特河，南北风景都吃到。",
+        tagline: "先在珀斯玩一天罗特尼斯岛看微笑袋鼠，再北上卡尔巴里，后半段南下玛格丽特河。",
         stats: [
-          { v: "1,800 km", k: "总里程" },
-          { v: "约 3.5h", k: "最长单日车程" },
+          { v: "约 1,750 km", k: "总里程" },
+          { v: "约 4.5h", k: "最长单日车程" },
           { v: "2 晚 / 2 晚", k: "Kalbarri / 玛河" },
-          { v: "0", k: "航班 / 异地还车" }
+          { v: "1 天", k: "罗特尼斯岛 quokka" }
         ],
-        chips: ["9/26 珀斯", "9/27 尖石阵", "9/28 Geraldton", "9/29–30 Kalbarri ×2", "10/1 南返 Jurien", "10/2 珀斯 / Fremantle", "10/3–4 玛格丽特河 ×2", "10/5 回珀斯"],
-        callout: "<strong>想南北都走一点就选这个。</strong>北线精简为 Kalbarri 2 晚，10/2 回到珀斯换个节奏，再南下玛格丽特河看酒庄、海滩和洞穴。最长单日约 3.5h，仍在单人可控范围。",
+        chips: ["9/26 珀斯", "9/27 Fremantle + 罗特尼斯岛", "9/28 尖石阵", "9/29–30 Kalbarri ×2", "10/1 Jurien Bay", "10/2 回珀斯", "10/3–4 玛格丽特河 ×2", "10/5 回珀斯"],
+        callout: "<strong>南北都吃到，还能撸到微笑袋鼠。</strong>9/27 整天留给弗里曼特尔与罗特尼斯岛（quokka 只在岛上），9/28 早上再取车北上，省一天租车与市区停车。北线精简为 Kalbarri 2 晚，后半段南下玛格丽特河。",
         warn: false,
         outbound: ["perth", "cervantes", "geraldton", "huttlagoon", "kalbarri"],
         back: ["kalbarri", "jurien", "perth", "busselton", "margaret"],
-        extra: ["pinnacles", "fremantle", "dongara"],
+        extra: ["rottnest", "fremantle", "pinnacles", "dongara"],
         gmaps: {
           all: gmapsUrl("Perth WA, Australia", "Perth WA, Australia", ["Cervantes WA", "Geraldton WA", "Kalbarri WA", "Jurien Bay WA", "Busselton WA", "Margaret River WA"]),
           out: gmapsUrl("Perth WA, Australia", "Kalbarri WA, Australia", ["Cervantes WA", "Geraldton WA", "Hutt Lagoon Port Gregory WA"]),
@@ -829,32 +829,33 @@
           embed: embedUrl("Perth WA", "Margaret River WA", ["Cervantes WA", "Geraldton WA", "Kalbarri WA", "Jurien Bay WA", "Busselton WA"])
         },
         notes: [
-          "北线压缩：Geraldton 只住 1 晚，Kalbarri 2 晚",
-          "10/1 Kalbarri → Jurien Bay 约 3.5h，是最长的一天",
-          "10/2 回珀斯后可逛 Fremantle 换换口味",
-          "玛格丽特河 2 晚：酒庄别贪多，2–3 家足够",
-          "10/5 玛河 → 珀斯约 3h，上午出发即可"
+          "9/27 罗特尼斯岛：轮渡从 Fremantle 出发约 30 分钟，岛上租自行车环岛",
+          "轮渡与岛上自行车建议提前订，周末更紧张",
+          "9/28 早上再取车，省一天租金和市区停车",
+          "9/29 约 4.5h 是全程最长的一天，早发并中途在 Geraldton 休息",
+          "10/1 Kalbarri → Jurien Bay 约 3.5h，为次日回珀斯铺路",
+          "玛格丽特河 2 晚：酒庄别贪多，2–3 家足够"
         ],
         days: [
-          { d: "26", date: "9月26日 周六", at: "perth", t: "抵达珀斯 · 休整取车", b: "早上落地补眠，下午取车熟悉左侧行驶，采买路上补给。", stay: "珀斯", drive: "市区短途", leg: "out" },
-          { d: "27", date: "9月27日 周日", at: "cervantes", t: "海岸公路 → 尖石阵 → Cervantes", b: "走 Indian Ocean Drive，可停 Lancelin 沙丘。傍晚看尖石阵，就近住 Cervantes。", stay: "Cervantes", drive: "约 2.5h", leg: "out" },
-          { d: "28", date: "9月28日 周一", at: "geraldton", t: "→ Dongara → Geraldton", b: "沿海北上，Dongara 停留吃饭。下午到 Geraldton，逛海边。", stay: "Geraldton", drive: "约 3h", leg: "out" },
-          { d: "29", date: "9月29日 周二", at: "kalbarri", t: "粉红湖 → 卡尔巴里", b: "经 Port Gregory 停 Hutt Lagoon 粉红湖。下午到 Kalbarri，走海岸悬崖观景点看日落。", stay: "Kalbarri 第 1 晚", drive: "约 2.5h", leg: "out" },
-          { d: "30", date: "9月30日 周三", at: "kalbarrinp", t: "卡尔巴里峡谷日", b: "清晨 Skywalk 与 Nature’s Window，中午前回镇。下午海边或镇上休息。", stay: "Kalbarri 第 2 晚", drive: "园区往返约 1.5h", leg: "out" },
-          { d: "01", date: "10月1日 周四", at: "jurien", t: "南返长途日 · Jurien Bay", b: "本行程最长的一天（约 3.5h）。中途 Geraldton 或 Dongara 停下休息，傍晚到 Jurien Bay。", stay: "Jurien Bay", drive: "约 3.5h", leg: "back" },
-          { d: "02", date: "10月2日 周五", at: "perth", t: "回珀斯 · Fremantle", b: "上午回珀斯（约 2.5h）。下午逛 Fremantle 港口与咖啡街，晚上住珀斯，换个节奏。", stay: "珀斯 / Fremantle", drive: "约 2.5h", leg: "back" },
+          { d: "26", date: "9月26日 周六", at: "perth", t: "抵达珀斯 · 休整", b: "早上落地先补眠。今天不取车，傍晚 Kings Park 或天鹅河边散步。顺手确认明天的罗特尼斯轮渡。", stay: "珀斯", drive: "市区公交 / 步行", leg: "out" },
+          { d: "27", date: "9月27日 周日", at: "rottnest", t: "弗里曼特尔 + 罗特尼斯岛看微笑袋鼠", b: "上午从 Fremantle 坐轮渡上罗特尼斯岛（约 30 分钟），租自行车环岛，找 quokka 合影，顺便下海游泳。傍晚回 Fremantle 逛港口、市集与咖啡街。", stay: "珀斯 / Fremantle", drive: "轮渡 + 岛上骑行", leg: "out" },
+          { d: "28", date: "9月28日 周一", at: "cervantes", t: "取车北上 · 尖石阵 → Cervantes", b: "上午取车，走 Indian Ocean Drive 北上，可停 Lancelin 沙丘。傍晚看尖石阵，就近住 Cervantes。", stay: "Cervantes", drive: "约 2.5h", leg: "out" },
+          { d: "29", date: "9月29日 周二", at: "kalbarri", t: "最长一天 · 粉红湖 → 卡尔巴里", b: "北上约 4.5h。中途在 Geraldton 或 Dongara 停下吃饭休息，再经 Port Gregory 停 Hutt Lagoon 粉红湖。傍晚到 Kalbarri。", stay: "Kalbarri 第 1 晚", drive: "约 4.5h + 停靠", leg: "out" },
+          { d: "30", date: "9月30日 周三", at: "kalbarrinp", t: "卡尔巴里峡谷 + 海岸", b: "清晨进国家公园：Skywalk、Nature’s Window。中午前回镇避晒，下午走海岸悬崖观景点，看日落。", stay: "Kalbarri 第 2 晚", drive: "园区往返约 1.5h", leg: "out" },
+          { d: "01", date: "10月1日 周四", at: "jurien", t: "南返 · Jurien Bay", b: "南下约 3.5h，中途 Geraldton 或 Dongara 休息。傍晚到 Jurien Bay，海边散步。", stay: "Jurien Bay", drive: "约 3.5h", leg: "back" },
+          { d: "02", date: "10月2日 周五", at: "perth", t: "回珀斯 · 换节奏", b: "上午回珀斯（约 2.5h）。下午市区休整、洗衣、补给，为南下做准备。", stay: "珀斯", drive: "约 2.5h", leg: "back" },
           { d: "03", date: "10月3日 周六", at: "margaret", t: "南下 · Busselton → 玛格丽特河", b: "南下途中停 Busselton 长栈桥。下午到 Margaret River 入住，镇上走走。", stay: "玛格丽特河 第 1 晚", drive: "约 3h", leg: "back" },
-          { d: "04", date: "10月4日 周日", at: "margaret", t: "玛格丽特河一日", b: "上午海滩或 Mammoth / Lake Cave 洞穴，中午酒庄午餐，下午再选一家精品酒庄。", stay: "玛格丽特河 第 2 晚", drive: "区域短途", leg: "back" },
-          { d: "05", date: "10月5日 周一", at: "perth", t: "回珀斯 · 还车", b: "上午出发回珀斯（约 3h）。下午还车、吃饭休整，约 21:00 前往机场赶 10/6 00:16。", stay: "赶飞机", drive: "约 3h", leg: "back" }
+          { d: "04", date: "10月4日 周日", at: "margaret", t: "玛格丽特河一日", b: "上午 Prevelly / Gnarabup 海滩，或 Mammoth / Lake Cave 洞穴二选一；中午酒庄午餐，下午再选一家精品酒庄。", stay: "玛格丽特河 第 2 晚", drive: "区域短途", leg: "back" },
+          { d: "05", date: "10月5日 周一", at: "perth", t: "回珀斯 · 还车", b: "上午出发回珀斯（约 3h），可停 Bunbury。下午还车、吃饭休整，约 21:00 前往机场赶 10/6 00:16。", stay: "赶飞机", drive: "约 3h", leg: "back" }
         ],
         table: [
-          ["9/26", "抵达珀斯", "—", "珀斯"],
-          ["9/27", "珀斯 → 尖石阵 → Cervantes", "约 2.5h", "Cervantes"],
-          ["9/28", "→ Geraldton", "约 3h", "Geraldton"],
-          ["9/29", "→ 粉红湖 → Kalbarri", "约 2.5h", "Kalbarri"],
-          ["9/30", "卡尔巴里峡谷", "园区短途", "Kalbarri"],
+          ["9/26", "抵达珀斯（不取车）", "—", "珀斯"],
+          ["9/27", "Fremantle + 罗特尼斯岛", "轮渡 + 骑行", "珀斯 / Fremantle"],
+          ["9/28", "取车 → 尖石阵 → Cervantes", "约 2.5h", "Cervantes"],
+          ["9/29", "→ 粉红湖 → Kalbarri", "约 4.5h", "Kalbarri"],
+          ["9/30", "卡尔巴里峡谷 + 海岸", "园区短途", "Kalbarri"],
           ["10/1", "Kalbarri → Jurien Bay", "约 3.5h", "Jurien Bay"],
-          ["10/2", "→ 珀斯 / Fremantle", "约 2.5h", "珀斯"],
+          ["10/2", "→ 珀斯", "约 2.5h", "珀斯"],
           ["10/3", "→ Busselton → 玛格丽特河", "约 3h", "玛格丽特河"],
           ["10/4", "玛格丽特河一日", "区域短途", "玛格丽特河"],
           ["10/5", "→ 珀斯 → 机场", "约 3h", "赶 00:16"]
