@@ -1,26 +1,30 @@
 # 西澳北线行程 · Coral Coast
 
-跳过鲨鱼湾的 **10–11 天**珊瑚海岸行程页，现为 **开车往返** 版（珀斯 ↔ 尖石阵 ↔ 卡尔巴里 ↔ Exmouth / 宁格鲁，珀斯取还车）。
+**2026.9.26 早到珀斯 → 10.6 00:16 离开** · **开车往返（回程优化版）**
 
-## 在线预览（GitHub Pages）
+北上直奔宁格鲁；回程走 **Coral Bay 浮潜 → 粉红湖 → Cervantes → 尖石阵金光 + 印度洋海岸公路**。
 
-发布后访问：
+## 日期速览
 
-**https://jazzisfuture.github.io/CuteCockroach/**
+| 日期 | 行程 | 过夜 |
+|------|------|------|
+| 9/26 六 | 抵达珀斯 | 珀斯 |
+| 9/27 日 | 北上（尖石阵可略） | Geraldton |
+| 9/28 一 | Kalbarri 海岸 | Kalbarri |
+| 9/29 二 | 峡谷后北上 | Carnarvon |
+| 9/30–10/2 | Exmouth / 宁格鲁 | Exmouth ×3 |
+| 10/3 六 | Coral Bay 浮潜 | Coral Bay |
+| 10/4 日 | 粉红湖 → Cervantes | Cervantes |
+| 10/5 一 | 尖石阵金光 → 珀斯机场 | 赶 00:16 |
 
-页面包含：
+## GitHub Pages
 
-- Leaflet 互动路线图（点击标记联动日程）
-- 嵌入式 Google 地图驾车路线
-- 一键在 Google 地图 App 打开完整导航
-- 逐日住宿 / 车程说明
+Settings → Pages → Deploy from a branch → `main` / `/docs`
 
-## 本地打开
+https://jazzisfuture.github.io/CuteCockroach/
 
-直接打开 `docs/index.html`，或在仓库根目录：
+## 本地
 
 ```bash
 python3 -m http.server 8080 --directory docs
 ```
-
-然后访问 http://localhost:8080
