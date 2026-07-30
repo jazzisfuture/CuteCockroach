@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>西澳北线 · 珊瑚海岸 10–11 天</title>
+  <meta name="description" content="珀斯 → 尖石阵 → 卡尔巴里 → Exmouth / 宁格鲁 · 跳过鲨鱼湾的北线行程" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <style>
+    :root {
+      --sand: #e8dcc8;
+      --foam: #f3f7f4;
+      --sea: #0b4f6c;
+      --sea-deep: #073a50;
+      --teal: #1a7a6d;
+      --coral: #c45c3e;
+      --ink: #14212b;
+      --muted: #5a6b75;
+      --line: rgba(20, 33, 43, 0.12);
+      --card: rgba(255, 255, 255, 0.72);
+      --shadow: 0 18px 50px rgba(7, 58, 80, 0.12);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Manrope", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(26, 122, 109, 0.18), transparent 60%),
+        radial-gradient(900px 500px at 100% 0%, rgba(196, 92, 62, 0.12), transparent 55%),
+        linear-gradient(180deg, #d9ebe6 0%, var(--foam) 28%, #eef3f0 100%);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    a { color: var(--sea); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+    a:hover { color: var(--coral); }
+
+    .wrap {
+      width: min(1120px, calc(100% - 2rem));
+      margin: 0 auto;
+    }
+
+    /* —— Hero —— */
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: grid;
+      align-items: end;
+      padding: 1.25rem 0 2.5rem;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(7, 58, 80, 0.15) 0%, rgba(7, 58, 80, 0.55) 55%, rgba(7, 58, 80, 0.88) 100%),
+        url("https://images.unsplash.com/photo-1589308078059-be1415eab4c3?auto=format&fit=crop&w=1800&q=80") center/cover no-repeat;
+      z-index: 0;
+      transform: scale(1.02);
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes drift {
+      from { transform: scale(1.02) translateY(0); }
+      to { transform: scale(1.06) translateY(-1.5%); }
+    }
+
+    .nav {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      color: #f7faf9;
+      padding: 0.5rem 0 3rem;
+    }
+
+    .brand {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-size: clamp(1.6rem, 3vw, 2.1rem);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      font-size: 0.92rem;
+      font-weight: 500;
+    }
+
+    .nav-links a { color: rgba(247, 250, 249, 0.9); text-decoration: none; }
+    .nav-links a:hover { color: #fff; }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+      color: #f7faf9;
+      max-width: 42rem;
+      padding-bottom: 1rem;
+      animation: rise 0.9s ease-out both;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-copy h1 {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-size: clamp(2.6rem, 7vw, 4.6rem);
+      line-height: 1.05;
+      font-weight: 400;
+      margin: 0.4rem 0 1rem;
+    }
+
+    .hero-copy h1 em {
+      font-style: italic;
+      color: #b8e0d6;
+    }
+
+    .hero-copy p {
+      font-size: 1.05rem;
+      color: rgba(247, 250, 249, 0.88);
+      max-width: 34rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      border: 0;
+      border-radius: 999px;
+      padding: 0.85rem 1.25rem;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: #f3f7f4;
+      color: var(--sea-deep);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-sea {
+      background: var(--sea);
+      color: #fff;
+    }
+
+    .btn-sea:hover { background: var(--sea-deep); color: #fff; }
+
+    /* —— Sections —— */
+    section {
+      padding: 4rem 0 1rem;
+    }
+
+    .section-head {
+      display: grid;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+      max-width: 40rem;
+    }
+
+    .section-head .eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    .section-head h2 {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.15;
+    }
+
+    .section-head p { color: var(--muted); }
+
+    /* —— Map —— */
+    .map-panel {
+      background: var(--card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--line);
+      border-radius: calc(var(--radius) + 6px);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      animation: rise 1s 0.15s ease-out both;
+    }
+
+    .map-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.1rem;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.55);
+    }
+
+    .map-toolbar strong {
+      font-size: 0.95rem;
+    }
+
+    .map-toolbar span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.82rem;
+      margin-top: 0.15rem;
+    }
+
+    .map-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    #route-map {
+      height: min(68vh, 640px);
+      width: 100%;
+      background: #c5d9d3;
+    }
+
+    .legend {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.6rem;
+      padding: 1rem 1.1rem 1.15rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.84rem;
+      color: var(--muted);
+    }
+
+    .legend i {
+      display: inline-block;
+      width: 0.65rem;
+      height: 0.65rem;
+      border-radius: 50%;
+      margin-right: 0.4rem;
+      vertical-align: middle;
+    }
+
+    .leaflet-popup-content-wrapper {
+      border-radius: 12px;
+      font-family: "Manrope", sans-serif;
+    }
+
+    .popup-day {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--teal);
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+
+    .popup-title {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-size: 1.2rem;
+      margin-bottom: 0.25rem;
+    }
+
+    /* —— Overview chips —— */
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin: 1.25rem 0 0;
+    }
+
+    .chip {
+      background: rgba(11, 79, 108, 0.08);
+      color: var(--sea-deep);
+      border: 1px solid rgba(11, 79, 108, 0.12);
+      border-radius: 999px;
+      padding: 0.45rem 0.85rem;
+      font-size: 0.86rem;
+      font-weight: 600;
+    }
+
+    /* —— Timeline —— */
+    .timeline {
+      display: grid;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .day {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.68);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.15rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      scroll-margin-top: 1rem;
+    }
+
+    .day:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .day.active {
+      border-color: rgba(26, 122, 109, 0.45);
+      box-shadow: 0 0 0 3px rgba(26, 122, 109, 0.12);
+    }
+
+    .day-num {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-size: 2rem;
+      line-height: 1;
+      color: var(--sea);
+    }
+
+    .day-num small {
+      display: block;
+      font-family: "Manrope", sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.45rem;
+      font-weight: 700;
+    }
+
+    .day h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .day p { color: var(--muted); font-size: 0.95rem; }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.85rem;
+      margin-top: 0.75rem;
+      font-size: 0.82rem;
+      color: var(--sea-deep);
+      font-weight: 600;
+    }
+
+    .meta span::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--coral);
+      margin-right: 0.4rem;
+      vertical-align: middle;
+    }
+
+    /* —— Tips / table —— */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1rem;
+    }
+
+    .panel {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+    }
+
+    .panel h3 {
+      font-family: "Instrument Serif", Georgia, serif;
+      font-size: 1.45rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .panel ul {
+      list-style: none;
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .panel li {
+      padding-left: 1rem;
+      position: relative;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .panel li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55rem;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 0.7rem 0.4rem;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    th { color: var(--muted); font-weight: 600; font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; }
+
+    .google-embed {
+      margin-top: 1rem;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .google-embed iframe {
+      display: block;
+      width: 100%;
+      height: min(520px, 70vh);
+      border: 0;
+    }
+
+    footer {
+      padding: 3rem 0 2.5rem;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    footer .brand {
+      color: var(--ink);
+      font-size: 1.4rem;
+      margin-bottom: 0.35rem;
+    }
+
+    @media (max-width: 800px) {
+      .day { grid-template-columns: 1fr; gap: 0.4rem; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .nav { align-items: flex-start; flex-direction: column; }
+      .hero { min-height: 84vh; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-bg, .hero-copy, .map-panel { animation: none; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="wrap" style="position: relative; z-index: 2; width: min(1120px, calc(100% - 2rem));">
+      <nav class="nav">
+        <div class="brand">Coral Coast</div>
+        <div class="nav-links">
+          <a href="#map">路线图</a>
+          <a href="#plan">日程</a>
+          <a href="#google">Google 地图</a>
+          <a href="#tips">注意事项</a>
+        </div>
+      </nav>
+      <div class="hero-copy">
+        <div class="eyebrow" style="letter-spacing:0.14em;text-transform:uppercase;font-size:0.78rem;font-weight:700;color:#b8e0d6;">西澳 · 10–11 天北线</div>
+        <h1>珊瑚海岸<br /><em>跳过鲨鱼湾</em>的完整路线</h1>
+        <p>珀斯出发，经尖石阵、卡尔巴里，北上 Exmouth / 宁格鲁浮潜。鲨鱼湾无房也不影响主线体验。</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#map">查看互动路线图</a>
+          <a class="btn btn-ghost" id="open-gmaps" href="#" target="_blank" rel="noopener">在 Google 地图打开</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="map">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Route Map</div>
+          <h2>整条北线，一眼看清</h2>
+          <p>点击地图标记可跳到对应日程。蓝线为自驾主线，Exmouth 回珀斯建议机票，避免超长回程。</p>
+        </div>
+
+        <div class="chips" aria-label="行程概览">
+          <span class="chip">珀斯</span>
+          <span class="chip">尖石阵</span>
+          <span class="chip">Geraldton</span>
+          <span class="chip">Kalbarri ×2</span>
+          <span class="chip">Carnarvon 过渡</span>
+          <span class="chip">Exmouth / 宁格鲁 ×4</span>
+          <span class="chip">飞回珀斯</span>
+        </div>
+
+        <div class="map-panel" style="margin-top: 1.25rem;">
+          <div class="map-toolbar">
+            <div>
+              <strong>西澳珊瑚海岸自驾线</strong>
+              <span>Leaflet 互动图 · 约 1,250 km 北上（不含回程飞行）</span>
+            </div>
+            <div class="map-actions">
+              <button type="button" class="btn btn-sea" id="fit-route">全览路线</button>
+              <a class="btn btn-ghost" style="background:#fff;color:var(--sea-deep);border-color:var(--line);" id="open-gmaps-2" href="#" target="_blank" rel="noopener">Google 导航</a>
+            </div>
+          </div>
+          <div id="route-map" role="application" aria-label="西澳北线路线图"></div>
+          <div class="legend">
+            <div><i style="background:#0b4f6c"></i>自驾过夜点</div>
+            <div><i style="background:#1a7a6d"></i>景点 / 浮潜</div>
+            <div><i style="background:#c45c3e"></i>回程航班（建议）</div>
+            <div><i style="background:#0b4f6c;border-radius:2px;width:14px;height:3px;vertical-align:middle;"></i>北上公路主线</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="plan">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Day by Day</div>
+          <h2>10–11 天详细行程</h2>
+          <p>节奏偏松：卡尔巴里住够，把多出来的夜晚全给宁格鲁。</p>
+        </div>
+
+        <div class="timeline" id="timeline">
+          <!-- filled by JS for single source of truth -->
+        </div>
+      </div>
+    </section>
+
+    <section id="google">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Google Maps</div>
+          <h2>完整谷歌路线</h2>
+          <p>下方嵌入 Google 地图驾车路线（珀斯 → 尖石阵 → Geraldton → Kalbarri → Carnarvon → Exmouth）。也可点按钮在 App 中打开。</p>
+        </div>
+        <div class="cta-row" style="margin-bottom: 1rem;">
+          <a class="btn btn-sea" id="open-gmaps-3" href="#" target="_blank" rel="noopener">在 Google 地图中打开完整路线</a>
+        </div>
+        <div class="google-embed">
+          <iframe
+            title="Google Maps 西澳北线驾车路线"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+            src="https://maps.google.com/maps?f=d&hl=zh-CN&saddr=Perth+WA&daddr=The+Pinnacles+Nambung+National+Park+WA+to:Geraldton+WA+to:Kalbarri+WA+to:Carnarvon+WA+to:Exmouth+WA&ie=UTF8&t=m&z=6&output=embed">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="tips">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Notes</div>
+          <h2>订房、驾驶与季节</h2>
+        </div>
+        <div class="grid-2">
+          <div class="panel">
+            <h3>订房优先顺序</h3>
+            <ul>
+              <li>Exmouth（尽量 3–4 晚）</li>
+              <li>Kalbarri（2 晚）</li>
+              <li>过渡夜：Carnarvon；订不到可试 Coral Bay，或 Kalbarri 早发直开 Exmouth</li>
+              <li>Geraldton / Dongara、珀斯首尾相对好订</li>
+              <li>回程机票：Exmouth → 珀斯尽早定，车在 Exmouth 还</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>实用提醒</h3>
+            <ul>
+              <li>夏天峡谷务必早出，中午避暑，带足水</li>
+              <li>北上加油站间距大，过半箱就考虑加油</li>
+              <li>Turquoise Bay 注意水流方向；Oyster Stacks 看潮汐窗口</li>
+              <li>鲸鲨船约 3–7 月需提前订</li>
+              <li>主点基本柏油路，普通轿车可完成</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-top: 1rem;">
+          <h3>住宿与车程速查</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>天</th>
+                <th>从 → 到</th>
+                <th>大约车程</th>
+                <th>过夜</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>D2</td><td>珀斯 → 尖石阵 → Geraldton</td><td>2h + 2.5h</td><td>Geraldton</td></tr>
+              <tr><td>D3</td><td>Geraldton → Kalbarri</td><td>1.5–2h</td><td>Kalbarri</td></tr>
+              <tr><td>D5</td><td>Kalbarri → Carnarvon</td><td>约 4.5h</td><td>Carnarvon</td></tr>
+              <tr><td>D6</td><td>Carnarvon → Exmouth</td><td>约 3.5h</td><td>Exmouth</td></tr>
+              <tr><td>D11</td><td>Exmouth ✈ 珀斯</td><td>约 2h 飞行</td><td>离开 / 珀斯</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="brand">Coral Coast</div>
+      <p>西澳北线行程页 · 鲨鱼湾无房替代方案 · 可离线打开本页查看路线与日程</p>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script>
+    const stops = [
+      {
+        id: "perth",
+        day: "D1",
+        name: "珀斯 Perth",
+        nameEn: "Perth",
+        lat: -31.9554,
+        lng: 115.8586,
+        stay: "珀斯市区",
+        drive: "落地休整",
+        type: "stay",
+        summary: "抵达休整。傍晚 Kings Park 或天鹅河散步，当晚或次日清晨取车。"
+      },
+      {
+        id: "pinnacles",
+        day: "D2",
+        name: "尖石阵 Pinnacles",
+        nameEn: "The Pinnacles, Nambung NP",
+        lat: -30.6063,
+        lng: 115.1602,
+        stay: "途经 · 不住宿",
+        drive: "珀斯出发约 2–2.5h",
+        type: "sight",
+        summary: "Nambung 国家公园尖石沙漠。日落光线佳；可顺路看 Lake Thetis（时间紧可跳过）。"
+      },
+      {
+        id: "geraldton",
+        day: "D2",
+        name: "杰拉尔顿 Geraldton",
+        nameEn: "Geraldton",
+        lat: -28.7741,
+        lng: 114.6083,
+        stay: "Geraldton / Dongara",
+        drive: "尖石阵再北约 2–3h",
+        type: "stay",
+        summary: "尖石阵后继续北上过夜。次日可简单逛海边再前往卡尔巴里。"
+      },
+      {
+        id: "kalbarri",
+        day: "D3–D4",
+        name: "卡尔巴里 Kalbarri",
+        nameEn: "Kalbarri",
+        lat: -27.7104,
+        lng: 114.1646,
+        stay: "Kalbarri ×2 晚",
+        drive: "自 Geraldton 约 1.5–2h",
+        type: "stay",
+        summary: "D3 海岸线观景点；D4 Skywalk、Z Bend / Nature’s Window。夏天早出避暑。"
+      },
+      {
+        id: "carnarvon",
+        day: "D5",
+        name: "卡纳文 Carnarvon",
+        nameEn: "Carnarvon",
+        lat: -24.8801,
+        lng: 113.6589,
+        stay: "Carnarvon（过渡）",
+        drive: "自 Kalbarri 约 4.5h",
+        type: "stay",
+        summary: "拆开超长车程的过渡夜。订不到可改 Coral Bay，或次日一鼓作气开到 Exmouth。"
+      },
+      {
+        id: "exmouth",
+        day: "D6–D9",
+        name: "Exmouth / 宁格鲁",
+        nameEn: "Exmouth",
+        lat: -21.9317,
+        lng: 114.1205,
+        stay: "Exmouth ×3–4 晚",
+        drive: "自 Carnarvon 约 3.5h",
+        type: "stay",
+        summary: "北线核心。安顿后去 Vlamingh Head 看日落，后续安排浮潜与国家公园。"
+      },
+      {
+        id: "turquoise",
+        day: "D7–D8",
+        name: "Turquoise Bay",
+        nameEn: "Turquoise Bay",
+        lat: -22.0314,
+        lng: 113.9325,
+        stay: "仍住 Exmouth",
+        drive: "镇区约 45–60 分钟",
+        type: "sight",
+        summary: "宁格鲁经典浮潜点。注意海流方向；可另排船潜或查潮汐去 Oyster Stacks。"
+      },
+      {
+        id: "flight",
+        day: "D10–D11",
+        name: "飞回珀斯",
+        nameEn: "Exmouth → Perth flight",
+        lat: -22.2356,
+        lng: 114.0886,
+        stay: "珀斯 / 离开",
+        drive: "飞行约 2h",
+        type: "flight",
+        summary: "Exmouth 还车，飞回珀斯衔接离开航班。建议预留充足转机时间。"
+      }
+    ];
+
+    const days = [
+      {
+        key: "d1",
+        stopId: "perth",
+        label: "01",
+        title: "抵达珀斯",
+        body: "休整、采买路上水和零食。傍晚 Kings Park 或河边走走。",
+        stay: "珀斯",
+        drive: "无长途"
+      },
+      {
+        key: "d2",
+        stopId: "pinnacles",
+        label: "02",
+        title: "尖石阵 → Geraldton",
+        body: "珀斯出发前往 Nambung 尖石阵，下午/傍晚继续北上过夜。",
+        stay: "Geraldton 或 Dongara",
+        drive: "合计约 5h+"
+      },
+      {
+        key: "d3",
+        stopId: "kalbarri",
+        label: "03",
+        title: "抵达卡尔巴里 · 海岸线",
+        body: "开往 Kalbarri。下午走 Natural Bridge、Island Rock 等海岸观景点，看悬崖日落。",
+        stay: "Kalbarri",
+        drive: "约 1.5–2h"
+      },
+      {
+        key: "d4",
+        stopId: "kalbarri",
+        label: "04",
+        title: "卡尔巴里峡谷日",
+        body: "Skywalk + Z Bend / Nature’s Window（选 1–2 条）。中午回镇避暑，下午补海岸线。",
+        stay: "Kalbarri",
+        drive: "园区短途"
+      },
+      {
+        key: "d5",
+        stopId: "carnarvon",
+        label: "05",
+        title: "北上过渡夜",
+        body: "离开 Kalbarri，开往 Carnarvon 拆车程。若无房：Coral Bay，或隔日直开 Exmouth。",
+        stay: "Carnarvon / 备选 Coral Bay",
+        drive: "约 4.5h"
+      },
+      {
+        key: "d6",
+        stopId: "exmouth",
+        label: "06",
+        title: "抵达 Exmouth",
+        body: "上午到镇安顿。下午 Vlamingh Head 灯塔日落，或 Town Beach 适应海水。",
+        stay: "Exmouth",
+        drive: "约 3.5h"
+      },
+      {
+        key: "d7",
+        stopId: "turquoise",
+        label: "07",
+        title: "宁格鲁浮潜日",
+        body: "Turquoise Bay 浮潜（遵从当地水流提示），或报浮潜/船团。鲸鲨季优先订船。",
+        stay: "Exmouth",
+        drive: "往返约 2h"
+      },
+      {
+        key: "d8",
+        stopId: "turquoise",
+        label: "08",
+        title: "再潜一天 / Cape Range",
+        body: "第二次浮潜，或 Mandu Mandu 等步道。运气好可见海龟。",
+        stay: "Exmouth",
+        drive: "短途"
+      },
+      {
+        key: "d9",
+        stopId: "exmouth",
+        label: "09",
+        title: "缓节奏补漏",
+        body: "自由活动、补之前没去的点，整理行李并确认次日航班。",
+        stay: "Exmouth",
+        drive: "随意"
+      },
+      {
+        key: "d10",
+        stopId: "flight",
+        label: "10",
+        title: "飞回珀斯",
+        body: "还车 + Exmouth → 珀斯航班。可当晚离开，或在珀斯再住一晚。",
+        stay: "珀斯或离境",
+        drive: "飞行约 2h"
+      },
+      {
+        key: "d11",
+        stopId: "perth",
+        label: "11",
+        title: "缓冲离开日",
+        body: "11 天版缓冲：上午 Swan Valley / 海滩，或直接机场。也可把这天并进宁格鲁多住一晚。",
+        stay: "离开",
+        drive: "无"
+      }
+    ];
+
+    const gmapsUrl =
+      "https://www.google.com/maps/dir/?api=1&origin=" +
+      encodeURIComponent("Perth WA, Australia") +
+      "&destination=" +
+      encodeURIComponent("Exmouth WA, Australia") +
+      "&waypoints=" +
+      encodeURIComponent(
+        [
+          "The Pinnacles, Nambung National Park WA",
+          "Geraldton WA",
+          "Kalbarri WA",
+          "Carnarvon WA"
+        ].join("|")
+      ) +
+      "&travelmode=driving";
+
+    ["open-gmaps", "open-gmaps-2", "open-gmaps-3"].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.href = gmapsUrl;
+    });
+
+    const timeline = document.getElementById("timeline");
+    timeline.innerHTML = days
+      .map(
+        (d) => `
+      <article class="day" id="${d.key}" data-stop="${d.stopId}">
+        <div class="day-num">${d.label}<small>Day</small></div>
+        <div>
+          <h3>${d.title}</h3>
+          <p>${d.body}</p>
+          <div class="meta">
+            <span>住宿：${d.stay}</span>
+            <span>交通：${d.drive}</span>
+          </div>
+        </div>
+      </article>`
+      )
+      .join("");
+
+    const map = L.map("route-map", {
+      scrollWheelZoom: false,
+      zoomControl: true
+    });
+
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+      attribution: '&copy; OpenStreetMap &copy; CARTO',
+      maxZoom: 18
+    }).addTo(map);
+
+    const colors = {
+      stay: "#0b4f6c",
+      sight: "#1a7a6d",
+      flight: "#c45c3e"
+    };
+
+    function markerIcon(type) {
+      const color = colors[type] || colors.stay;
+      return L.divIcon({
+        className: "",
+        iconSize: [28, 28],
+        iconAnchor: [14, 14],
+        popupAnchor: [0, -12],
+        html: `<div style="
+          width:28px;height:28px;border-radius:50%;
+          background:${color};border:3px solid #fff;
+          box-shadow:0 6px 16px rgba(7,58,80,.35);
+        "></div>`
+      });
+    }
+
+    const driveStops = stops.filter((s) => s.type !== "flight" && s.id !== "turquoise");
+    const driveLatLngs = driveStops.map((s) => [s.lat, s.lng]);
+
+    const routeLine = L.polyline(driveLatLngs, {
+      color: "#0b4f6c",
+      weight: 4,
+      opacity: 0.85,
+      dashArray: null,
+      lineJoin: "round"
+    }).addTo(map);
+
+    const flightLine = L.polyline(
+      [
+        [stops.find((s) => s.id === "exmouth").lat, stops.find((s) => s.id === "exmouth").lng],
+        [stops.find((s) => s.id === "perth").lat, stops.find((s) => s.id === "perth").lng]
+      ],
+      {
+        color: "#c45c3e",
+        weight: 3,
+        opacity: 0.75,
+        dashArray: "8 10"
+      }
+    ).addTo(map);
+
+    const markerById = {};
+
+    stops.forEach((s) => {
+      const marker = L.marker([s.lat, s.lng], { icon: markerIcon(s.type) }).addTo(map);
+      marker.bindPopup(`
+        <div class="popup-day">${s.day}</div>
+        <div class="popup-title">${s.name}</div>
+        <div style="color:#5a6b75;font-size:0.88rem;margin-bottom:0.35rem;">${s.summary}</div>
+        <div style="font-size:0.8rem;font-weight:600;color:#073a50;">住宿：${s.stay}<br/>${s.drive}</div>
+      `);
+      marker.on("click", () => highlightStop(s.id));
+      markerById[s.id] = marker;
+    });
+
+    function fitRoute() {
+      const bounds = L.latLngBounds(driveLatLngs);
+      map.fitBounds(bounds.pad(0.12));
+    }
+
+    function highlightStop(stopId) {
+      document.querySelectorAll(".day").forEach((el) => {
+        el.classList.toggle("active", el.dataset.stop === stopId);
+      });
+      const first = document.querySelector(`.day[data-stop="${stopId}"]`);
+      if (first) first.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    document.getElementById("fit-route").addEventListener("click", fitRoute);
+
+    document.querySelectorAll(".day").forEach((el) => {
+      el.addEventListener("click", () => {
+        const id = el.dataset.stop;
+        const marker = markerById[id];
+        if (!marker) return;
+        map.flyTo(marker.getLatLng(), Math.max(map.getZoom(), 8), { duration: 0.8 });
+        marker.openPopup();
+        highlightStop(id);
+      });
+    });
+
+    fitRoute();
+    setTimeout(() => map.invalidateSize(), 200);
+    window.addEventListener("resize", () => map.invalidateSize());
+  </script>
+</body>
+</html>
