@@ -16,8 +16,8 @@
 |------|------|------|
 | 9/26 | Elizabeth Quay → CBD → Kings Park 日落 | 珀斯 |
 | 9/27 | 罗特尼斯岛 → Fremantle 市集与港口 | 珀斯 |
-| 9/28 | 取车 · 尖石阵 → Cervantes | Cervantes |
-| 9/29 | Dongara → Geraldton · HMAS Sydney II Memorial | Geraldton |
+| 9/28 | 取车 · 尖石阵 → Jurien Bay | Jurien Bay |
+| 9/29 | Jurien Bay → Dongara → Geraldton · HMAS Sydney II Memorial | Geraldton |
 | 9/30 | 粉红湖 → Kalbarri | Kalbarri |
 | 10/1 | 卡尔巴里海岸线 | Kalbarri |
 | 10/2 | 卡尔巴里峡谷与 Skywalk | Kalbarri |
