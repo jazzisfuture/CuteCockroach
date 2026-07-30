@@ -552,7 +552,7 @@
 
         <div class="plan-stats">
           <div class="stat"><b>约 1,150 km</b><span>自驾总里程</span></div>
-          <div class="stat"><b>约 4h</b><span>最长单日车程</span></div>
+          <div class="stat"><b>4.5–5h</b><span>最长纯驾驶时间</span></div>
           <div class="stat"><b>3 晚</b><span>卡尔巴里</span></div>
           <div class="stat"><b>3 晚</b><span>全程住珀斯</span></div>
         </div>
@@ -686,6 +686,18 @@
           </div>
 
           <div class="panel">
+            <h3>⑥ Perth Mint Gold Tour · 10/5（可选）</h3>
+            <ul>
+              <li>与首日的河畔、Kings Park 完全不同，安排在最后一天上午</li>
+              <li>官方导览约 60 分钟，包含现场铸金演示</li>
+              <li>建议订 10:30 或 11:30 场次，避免下午还车时间紧张</li>
+            </ul>
+            <div class="cta-row" style="margin-top:1rem;">
+              <a class="btn btn-sea" href="https://www.perthmint.com/visit/book-a-tour/" target="_blank" rel="noopener">Perth Mint 官方预订</a>
+            </div>
+          </div>
+
+          <div class="panel">
             <h3>无需提前预约</h3>
             <ul>
               <li>Kings Park、Elizabeth Quay、卡尔巴里海岸观景点</li>
@@ -743,7 +755,8 @@
               <li>每 1.5h 停车走动，不在疲劳时硬撑</li>
               <li>避免黄昏和夜间行驶，袋鼠上路风险更高</li>
               <li>过半箱就考虑加油，提前下载离线地图</li>
-              <li>10/4 是最长一天，约 4h，中途 Cervantes / Jurien Bay 休息</li>
+              <li>10/4 是最长一天：纯驾驶约 4.5–5h，含休息按 5–5.5h</li>
+              <li>返程走 Brand Highway，建议在 Eneabba / Badgingarra 休息，不再绕 Cervantes</li>
               <li>10/5 不跑长途，只在珀斯活动，航班缓冲充足</li>
             </ul>
           </div>
@@ -760,9 +773,9 @@
               <tr><td>9/29</td><td>Dongara → Geraldton</td><td>约 3h</td><td>Geraldton</td></tr>
               <tr><td>9/30</td><td>粉红湖 → Kalbarri</td><td>约 2.5h</td><td>Kalbarri</td></tr>
               <tr><td>10/1–2</td><td>海岸 + 峡谷</td><td>园区短途</td><td>Kalbarri ×2</td></tr>
-              <tr><td>10/3</td><td>Kalbarri → Geraldton</td><td>约 2h</td><td>Geraldton</td></tr>
-              <tr><td>10/4</td><td>Geraldton → 珀斯</td><td>约 4h</td><td>珀斯</td></tr>
-              <tr><td>10/5</td><td>珀斯自由活动 → 机场</td><td>市区短途</td><td>赶 00:16</td></tr>
+              <tr><td>10/3</td><td>Kalbarri → Geraldton · Point Moore</td><td>约 2h</td><td>Geraldton</td></tr>
+              <tr><td>10/4</td><td>Brand Highway → 珀斯</td><td>纯驾驶 4.5–5h</td><td>珀斯</td></tr>
+              <tr><td>10/5</td><td>Perth Mint → East Perth → 机场</td><td>市区短途</td><td>赶 00:16</td></tr>
             </tbody>
           </table>
         </div>
@@ -795,26 +808,28 @@
       geraldton: { name: "杰拉尔顿 Geraldton", lat: -28.7741, lng: 114.6083, type: "stay" },
       huttlagoon: { name: "Hutt Lagoon 粉红湖", lat: -28.0692, lng: 114.1984, type: "sight" },
       kalbarri: { name: "卡尔巴里 Kalbarri", lat: -27.7104, lng: 114.1646, type: "stay" },
-      kalbarrinp: { name: "Kalbarri 峡谷 / Skywalk", lat: -27.575, lng: 114.455, type: "sight" }
+      kalbarrinp: { name: "Kalbarri 峡谷 / Skywalk", lat: -27.575, lng: 114.455, type: "sight" },
+      eneabba: { name: "Eneabba 休息点", lat: -29.8167, lng: 115.2667, type: "sight" },
+      badgingarra: { name: "Badgingarra 休息点", lat: -30.3903, lng: 115.5008, type: "sight" }
     };
 
     const days = [
       { d:"26", date:"9月26日 周六", at:"perth", t:"珀斯市区 · 河畔与 Kings Park", b:"早上落地后先到酒店寄存行李、吃早午餐；随后逛 Elizabeth Quay、天鹅河畔与 CBD。下午回酒店入住休息，傍晚去 Kings Park 看城市与河景日落，晚上到 Northbridge 吃饭。不要安排需准点参加的上午活动。", stay:"珀斯 第 1 晚", drive:"步行 + 免费市区公交 / 打车", leg:"out" },
       { d:"27", date:"9月27日 周日", at:"rottnest", t:"罗特尼斯岛 + Fremantle", b:"从 Fremantle 搭 9:00 左右轮渡上岛，租自行车环岛、找 quokka 合影，可在 Basin 或 Little Salmon Bay 下水。约 16:00 返航，回到 Fremantle 后逛周日市集、Fishing Boat Harbour 和港口，吃完晚餐再回珀斯同一家酒店。", stay:"珀斯 第 2 晚", drive:"轮渡 + 骑行 + 步行", leg:"out" },
       { d:"28", date:"9月28日 周一", at:"cervantes", t:"取车北上 · 尖石阵 → Cervantes", b:"上午取车，走 Indian Ocean Drive 北上，可停 Lancelin 沙丘。下午逛尖石阵，傍晚住 Cervantes。", stay:"Cervantes", drive:"约 2.5h", leg:"out" },
-      { d:"29", date:"9月29日 周二", at:"geraldton", t:"Dongara → Geraldton", b:"沿海北上，在 Dongara / Port Denison 停下吃饭走走。下午到 Geraldton，逛海边和纪念馆。", stay:"Geraldton", drive:"约 3h", leg:"out" },
+      { d:"29", date:"9月29日 周二", at:"geraldton", t:"Dongara → Geraldton", b:"沿海北上，在 Dongara / Port Denison 停下吃饭走走。下午到 Geraldton，参观 HMAS Sydney II Memorial 或 Museum of Geraldton。", stay:"Geraldton", drive:"约 3h", leg:"out" },
       { d:"30", date:"9月30日 周三", at:"kalbarri", t:"粉红湖 → 卡尔巴里", b:"经 Northampton 前往 Port Gregory，停 Hutt Lagoon 粉红湖拍照。下午到 Kalbarri，傍晚看河口日落。", stay:"Kalbarri 第 1 晚", drive:"约 2.5h", leg:"out" },
       { d:"01", date:"10月1日 周四", at:"kalbarri", t:"卡尔巴里海岸线", b:"Natural Bridge、Island Rock、Eagle Gorge 等悬崖观景点一路短停。下午镇上休息。", stay:"Kalbarri 第 2 晚", drive:"镇区短途", leg:"out" },
       { d:"02", date:"10月2日 周五", at:"kalbarrinp", t:"峡谷与 Skywalk", b:"清晨进国家公园：Skywalk、Nature’s Window，体力够可加 Z Bend。中午前回镇避晒。", stay:"Kalbarri 第 3 晚", drive:"园区往返约 1.5h", leg:"out" },
-      { d:"03", date:"10月3日 周六", at:"geraldton", t:"南返第一段 · Geraldton", b:"上午离开 Kalbarri，约 2h 到 Geraldton。下午慢慢逛海滨，给明天较长车程养神。", stay:"Geraldton", drive:"约 2h", leg:"back" },
-      { d:"04", date:"10月4日 周日", at:"perth", t:"南返珀斯", b:"早上出发，约 4h 回到珀斯。中途在 Dongara、Jurien Bay 或 Cervantes 停下休息。下午入住珀斯。", stay:"珀斯", drive:"约 4h", leg:"back" },
-      { d:"05", date:"10月5日 周一", at:"perth", t:"珀斯自由活动 · 还车 · 机场", b:"上午在 CBD 购物，或补看 9/26 因疲劳跳过的珀斯市区景点。下午还车、取寄存行李、吃饭休整，约 21:00 前往机场赶 10/6 00:16。", stay:"赶飞机", drive:"市区短途", leg:"back" }
+      { d:"03", date:"10月3日 周六", at:"geraldton", t:"南返第一段 · Point Moore", b:"上午离开 Kalbarri，约 2h 到 Geraldton。今天不重复市区景点：入住后补给、洗衣和休息；傍晚有精力再去 Point Moore Lighthouse 或 Sunset Beach 看日落。", stay:"Geraldton", drive:"约 2h", leg:"back" },
+      { d:"04", date:"10月4日 周日", at:"perth", t:"Brand Highway 直返珀斯", b:"早上出发，走最快的 Brand Highway 返回珀斯；纯驾驶约 4.5–5h，含休息按 5–5.5h。途中只在 Eneabba、Badgingarra 等新休息点停车，不再绕回 Cervantes 或 Jurien Bay。", stay:"珀斯", drive:"约 5–5.5h（含休息）", leg:"back" },
+      { d:"05", date:"10月5日 周一", at:"perth", t:"Perth Mint · East Perth · 机场", b:"上午预约 Perth Mint Gold Tour，看现场铸金演示；随后去 Claisebrook Cove 吃午餐，沿河走到 Matagarup Bridge / Optus Stadium。下午回酒店取行李并还车，约 21:00 前往机场；当天景点与首日完全不重复。", stay:"赶飞机", drive:"市区短途", leg:"back" }
     ];
 
     const gmaps = {
-      all: "https://www.google.com/maps/dir/?api=1&origin=" + encodeURIComponent("Perth WA") + "&destination=" + encodeURIComponent("Perth WA") + "&waypoints=" + encodeURIComponent(["Cervantes WA","Geraldton WA","Hutt Lagoon Port Gregory WA","Kalbarri WA","Geraldton WA","Jurien Bay WA"].join("|")) + "&travelmode=driving",
+      all: "https://www.google.com/maps/dir/?api=1&origin=" + encodeURIComponent("Perth WA") + "&destination=" + encodeURIComponent("Perth WA") + "&waypoints=" + encodeURIComponent(["Cervantes WA","Geraldton WA","Hutt Lagoon Port Gregory WA","Kalbarri WA","Geraldton WA","Eneabba WA","Badgingarra WA"].join("|")) + "&travelmode=driving",
       north: "https://www.google.com/maps/dir/?api=1&origin=" + encodeURIComponent("Perth WA") + "&destination=" + encodeURIComponent("Kalbarri WA") + "&waypoints=" + encodeURIComponent(["Cervantes WA","Geraldton WA","Hutt Lagoon Port Gregory WA"].join("|")) + "&travelmode=driving",
-      south: "https://www.google.com/maps/dir/?api=1&origin=" + encodeURIComponent("Kalbarri WA") + "&destination=" + encodeURIComponent("Perth WA") + "&waypoints=" + encodeURIComponent(["Geraldton WA","Jurien Bay WA"].join("|")) + "&travelmode=driving"
+      south: "https://www.google.com/maps/dir/?api=1&origin=" + encodeURIComponent("Kalbarri WA") + "&destination=" + encodeURIComponent("Perth WA") + "&waypoints=" + encodeURIComponent(["Geraldton WA","Eneabba WA","Badgingarra WA"].join("|")) + "&travelmode=driving"
     };
 
     ["open-gmaps","open-gmaps-2","open-gmaps-3"].forEach(id => document.getElementById(id).href = gmaps.all);
@@ -839,7 +854,7 @@
     }
 
     const northIds = ["perth","cervantes","geraldton","huttlagoon","kalbarri"];
-    const southIds = ["kalbarri","geraldton","cervantes","perth"];
+    const southIds = ["kalbarri","geraldton","eneabba","badgingarra","perth"];
     const north = northIds.map(id => [places[id].lat, places[id].lng]);
     const south = southIds.map(id => [places[id].lat, places[id].lng + .22]);
     L.polyline(north, { color:"#0b4f6c", weight:4, opacity:.9 }).addTo(map);
