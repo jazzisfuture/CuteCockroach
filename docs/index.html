@@ -465,6 +465,78 @@
       margin-bottom: 0.35rem;
     }
 
+
+    /* —— Plan switcher —— */
+    .plan-switch {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.1rem;
+    }
+
+    .plan-tab {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 999px;
+      padding: 0.7rem 1.15rem;
+      font: inherit;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .plan-tab:hover { transform: translateY(-1px); color: var(--sea-deep); }
+
+    .plan-tab[aria-selected="true"] {
+      background: var(--sea);
+      color: #fff;
+      border-color: var(--sea);
+    }
+
+    .plan-tab small {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      opacity: 0.75;
+      margin-top: 0.15rem;
+    }
+
+    .plan-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 0.75rem;
+      margin: 1rem 0 0;
+    }
+
+    .stat {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 0.85rem 1rem;
+    }
+
+    .stat b {
+      display: block;
+      font-family: "Instrument Serif", Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--sea-deep);
+      line-height: 1.2;
+    }
+
+    .stat span {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .callout.warn {
+      background: rgba(196, 92, 62, 0.12);
+      border-color: rgba(196, 92, 62, 0.28);
+    }
+
     @media (max-width: 800px) {
       .day { grid-template-columns: 1fr; gap: 0.4rem; }
       .grid-2 { grid-template-columns: 1fr; }
@@ -485,7 +557,7 @@
       <nav class="nav">
         <div class="brand">Coral Coast</div>
         <div class="nav-links">
-          <a href="#map">路线图</a>
+          <a href="#map">方案与地图</a>
           <a href="#plan">日程</a>
           <a href="#google">Google 地图</a>
           <a href="#tips">注意事项</a>
@@ -493,10 +565,10 @@
       </nav>
       <div class="hero-copy">
         <div style="letter-spacing:0.14em;text-transform:uppercase;font-size:0.78rem;font-weight:700;color:#b8e0d6;">2026.9.26 早到珀斯 · 10.6 00:16 离开 · 单人自驾</div>
-        <h1>珊瑚海岸<br /><em>卡尔巴里折返</em>轻松版</h1>
-        <p>放弃 Exmouth，最北到卡尔巴里。往返约 <strong>1,150 km</strong>，每天开车基本不超过 2.5 小时，珀斯取还车、不异地。9 月底正逢野花季。</p>
+        <h1>西澳 10 日<br /><em>四个方案</em>随时切换</h1>
+        <p>卡尔巴里折返、卡尔巴里 + 西南、Exmouth 自驾往返、Exmouth 飞去飞回。地图、日程、车程表都会跟着切换。</p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="#map">查看路线图</a>
+          <a class="btn btn-primary" href="#map">对比四个方案</a>
           <a class="btn btn-ghost" id="open-gmaps" href="#" target="_blank" rel="noopener">在 Google 地图打开</a>
         </div>
       </div>
@@ -507,42 +579,41 @@
     <section id="map">
       <div class="wrap">
         <div class="section-head">
-          <div class="eyebrow">Round-trip Map</div>
-          <h2>最北只到卡尔巴里</h2>
-          <p>原 Exmouth 方案单人往返约 2,500 km，且末日要赶红眼航班。这版砍掉最累的 Carnarvon–Exmouth 段，玩的密度反而更高。</p>
+          <div class="eyebrow">Choose a plan</div>
+          <h2 id="plan-title">选择方案</h2>
+          <p id="plan-tagline">四个版本都按你的航班日期排好，点上方按钮切换。</p>
         </div>
 
-        <div class="chips" aria-label="行程概览">
-          <span class="chip">9/26 珀斯</span>
-          <span class="chip">9/27 尖石阵 · Jurien Bay</span>
-          <span class="chip">9/28–29 Geraldton ×2</span>
-          <span class="chip">9/30–10/2 Kalbarri ×3</span>
-          <span class="chip return">10/3 南返 Dongara</span>
-          <span class="chip return">10/4 Cervantes 尖石阵日落</span>
-          <span class="chip return">10/5 海岸公路回珀斯</span>
+        <div class="plan-switch" role="tablist" aria-label="行程方案">
+          <button class="plan-tab" role="tab" data-plan="kalbarri" aria-selected="true">卡尔巴里折返<small>最轻松 · 原版</small></button>
+          <button class="plan-tab" role="tab" data-plan="kalbarri-south" aria-selected="false">卡尔巴里 + 西南<small>北线 + 南线</small></button>
+          <button class="plan-tab" role="tab" data-plan="exmouth-drive" aria-selected="false">Exmouth 自驾往返<small>最硬核</small></button>
+          <button class="plan-tab" role="tab" data-plan="exmouth-fly" aria-selected="false">Exmouth 飞去飞回<small>飞北 + 开南</small></button>
         </div>
 
-        <div class="callout">
-          <strong>为什么砍掉 Exmouth：</strong>单人驾驶、无人换手，Carnarvon–Exmouth 往返多出约 1,300 km 和 4 个纯赶路日；且最后一天还要接 00:16 航班。改为卡尔巴里折返后，最长单日车程约 2.5h，全部住宿沿 1 号公路，珀斯取还车。
-        </div>
+        <div class="plan-stats" id="plan-stats"></div>
+
+        <div class="chips" id="plan-chips" aria-label="行程概览"></div>
+
+        <div class="callout" id="plan-callout"></div>
 
         <div class="map-panel" style="margin-top: 1.25rem;">
           <div class="map-toolbar">
             <div>
-              <strong>珀斯 ↔ 卡尔巴里 · 轻松往返</strong>
-              <span>蓝线北上 · 橙虚线南返 · 点击标记跳转日程</span>
+              <strong id="map-title">路线图</strong>
+              <span id="map-subtitle">蓝线自驾 · 橙虚线返程 · 点击标记跳转日程</span>
             </div>
             <div class="map-actions">
               <button type="button" class="btn btn-sea" id="fit-route">全览路线</button>
               <a class="btn btn-ghost" style="background:#fff;color:var(--sea-deep);border-color:var(--line);" id="open-gmaps-2" href="#" target="_blank" rel="noopener">Google 导航</a>
             </div>
           </div>
-          <div id="route-map" role="application" aria-label="珀斯至卡尔巴里往返路线图"></div>
+          <div id="route-map" role="application" aria-label="西澳行程路线图"></div>
           <div class="legend">
             <div><i style="background:#0b4f6c"></i>过夜点</div>
-            <div><i style="background:#1a7a6d"></i>景点 / 野花</div>
-            <div><i style="background:#0b4f6c;border-radius:2px;width:14px;height:3px;vertical-align:middle;"></i>北上</div>
-            <div><i style="background:#c45c3e;border-radius:2px;width:14px;height:3px;vertical-align:middle;"></i>南返（虚线）</div>
+            <div><i style="background:#1a7a6d"></i>景点 / 浮潜</div>
+            <div><i style="background:#0b4f6c;border-radius:2px;width:14px;height:3px;vertical-align:middle;"></i>去程</div>
+            <div><i style="background:#c45c3e;border-radius:2px;width:14px;height:3px;vertical-align:middle;"></i>返程 / 航班（虚线）</div>
           </div>
         </div>
       </div>
@@ -552,10 +623,9 @@
       <div class="wrap">
         <div class="section-head">
           <div class="eyebrow">Day by Day</div>
-          <h2>10 日轻松行程</h2>
-          <p>每天单段车程多在 1.5–2.5 小时，留足下车走动与休息时间。</p>
+          <h2>10 日逐日安排</h2>
+          <p id="plan-note">点任意一天可在地图上定位对应地点。</p>
         </div>
-
         <div class="timeline" id="timeline"></div>
       </div>
     </section>
@@ -564,22 +634,16 @@
       <div class="wrap">
         <div class="section-head">
           <div class="eyebrow">Google Maps</div>
-          <h2>完整谷歌路线</h2>
-          <p>北上经尖石阵、Jurien Bay、Geraldton、粉红湖到卡尔巴里；南返沿海岸公路回珀斯。</p>
+          <h2>谷歌路线</h2>
+          <p id="gmaps-note">按钮会跟随当前方案切换。</p>
         </div>
         <div class="cta-row" style="margin-bottom: 1rem;">
-          <a class="btn btn-sea" id="open-gmaps-3" href="#" target="_blank" rel="noopener">打开往返 Google 导航</a>
-          <a class="btn btn-ghost" style="background:#fff;color:var(--sea-deep);border-color:var(--line);" id="open-gmaps-north" href="#" target="_blank" rel="noopener">仅北上</a>
-          <a class="btn btn-ghost" style="background:#fff;color:var(--sea-deep);border-color:var(--line);" id="open-gmaps-south" href="#" target="_blank" rel="noopener">仅南返</a>
+          <a class="btn btn-sea" id="open-gmaps-3" href="#" target="_blank" rel="noopener">打开完整 Google 导航</a>
+          <a class="btn btn-ghost" style="background:#fff;color:var(--sea-deep);border-color:var(--line);" id="open-gmaps-north" href="#" target="_blank" rel="noopener">仅去程</a>
+          <a class="btn btn-ghost" style="background:#fff;color:var(--sea-deep);border-color:var(--line);" id="open-gmaps-south" href="#" target="_blank" rel="noopener">仅返程</a>
         </div>
         <div class="google-embed">
-          <iframe
-            title="Google Maps 珀斯至卡尔巴里驾车路线"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            allowfullscreen
-            src="https://maps.google.com/maps?f=d&hl=zh-CN&saddr=Perth+WA&daddr=Cervantes+WA+to:Jurien+Bay+WA+to:Geraldton+WA+to:Hutt+Lagoon+Port+Gregory+WA+to:Kalbarri+WA&ie=UTF8&t=m&z=6&output=embed">
-          </iframe>
+          <iframe id="gmaps-embed" title="Google Maps 路线" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen src=""></iframe>
         </div>
       </div>
     </section>
@@ -588,27 +652,22 @@
       <div class="wrap">
         <div class="section-head">
           <div class="eyebrow">Notes</div>
-          <h2>单人自驾要点</h2>
+          <h2>要点与车程表</h2>
         </div>
+
         <div class="grid-2">
           <div class="panel">
-            <h3>安全与节奏</h3>
-            <ul>
-              <li>每段控制在 2.5h 内，每 1.5h 停一次下车走动</li>
-              <li>尽量白天行驶：黄昏与夜间袋鼠、牛羊上路风险高</li>
-              <li>不赶夜路；到镇前先加油，过半箱就加</li>
-              <li>10/5 最后一天只开约 2.5h，给航班留足缓冲</li>
-              <li>提前下载离线地图，部分路段信号弱</li>
-            </ul>
+            <h3 id="notes-a-title">本方案节奏</h3>
+            <ul id="notes-a"></ul>
           </div>
           <div class="panel">
-            <h3>9 月底的加分项</h3>
+            <h3>单人自驾通则</h3>
             <ul>
-              <li><strong>野花季</strong>：Coalseam、Mullewa、Kalbarri 内陆正当时</li>
-              <li>Hutt Lagoon 粉红湖：正午前后颜色最明显</li>
-              <li>Geraldton 可加 Abrolhos 群岛观光飞行（看预算与天气）</li>
-              <li>Jurien Bay 可玩海狮浮潜；Lancelin 有沙丘</li>
-              <li>尖石阵放在傍晚，光影比正午好太多</li>
+              <li>每 1.5h 停一次下车走动，不硬撑</li>
+              <li>尽量白天行驶：黄昏夜间袋鼠、牛羊风险高</li>
+              <li>过半箱就加油，偏远段加油站可能早关</li>
+              <li>提前下载离线地图，部分路段信号弱</li>
+              <li>10/5 当天留足还车与去机场时间</li>
             </ul>
           </div>
         </div>
@@ -617,40 +676,32 @@
           <h3>车程速查</h3>
           <table>
             <thead>
-              <tr>
-                <th>日期</th>
-                <th>路段</th>
-                <th>车程</th>
-                <th>过夜</th>
-              </tr>
+              <tr><th>日期</th><th>路段</th><th>交通</th><th>过夜</th></tr>
             </thead>
-            <tbody>
-              <tr><td>9/26</td><td>抵达珀斯</td><td>—</td><td>珀斯</td></tr>
-              <tr><td>9/27</td><td>珀斯 → 尖石阵 → Jurien Bay</td><td>约 2.5h</td><td>Jurien Bay / Cervantes</td></tr>
-              <tr><td>9/28</td><td>→ Dongara → Geraldton</td><td>约 2.5h</td><td>Geraldton</td></tr>
-              <tr><td>9/29</td><td>Geraldton 周边野花 / 海边</td><td>短途往返</td><td>Geraldton</td></tr>
-              <tr><td>9/30</td><td>→ 粉红湖 → Kalbarri</td><td>约 2.5h</td><td>Kalbarri</td></tr>
-              <tr><td>10/1–2</td><td>Kalbarri 海岸 + 峡谷</td><td>园区短途</td><td>Kalbarri</td></tr>
-              <tr><td>10/3</td><td>Kalbarri → Dongara</td><td>约 2.5h</td><td>Dongara / Port Denison</td></tr>
-              <tr><td>10/4</td><td>→ Cervantes（尖石阵日落）</td><td>约 2h</td><td>Cervantes</td></tr>
-              <tr><td>10/5</td><td>海岸公路 → 珀斯 → 机场</td><td>约 2.5h</td><td>赶 10/6 00:16</td></tr>
-            </tbody>
+            <tbody id="drive-table"></tbody>
           </table>
         </div>
 
         <div class="panel" style="margin-top: 1rem;">
-          <h3>还是想去宁格鲁？</h3>
-          <p style="color:var(--muted);font-size:0.95rem;">
-            不必自己开长途：珀斯 <strong style="color:var(--ink)">往返飞 Exmouth（Learmonth）</strong>，在当地租小车或参加浮潜团住 3 晚，再单独安排珀斯周边即可。
-            这样既不异地还车，也避免一个人开 2,500 km。缺点是多一笔机票与当地租车费用。
-          </p>
+          <h3>四方案怎么选</h3>
+          <table>
+            <thead>
+              <tr><th>方案</th><th>总里程</th><th>最长单日</th><th>适合</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>卡尔巴里折返</td><td>约 1,150 km</td><td>约 2.5h</td><td>最省力，想彻底放松</td></tr>
+              <tr><td>卡尔巴里 + 西南</td><td>约 1,800 km</td><td>约 3.5h</td><td>想南北都看一点</td></tr>
+              <tr><td>Exmouth 自驾往返</td><td>约 2,500 km</td><td>约 7h</td><td>必须浮潜且不介意长途</td></tr>
+              <tr><td>Exmouth 飞去飞回</td><td>约 700 km + 机票</td><td>约 3h</td><td>想去宁格鲁但不想独自开长途</td></tr>
+            </tbody>
+          </table>
         </div>
 
         <div class="panel" style="margin-top: 1rem;">
           <h3>10月5日 / 6日凌晨航班</h3>
           <p style="color:var(--muted);font-size:0.95rem;">
             起飞 <strong style="color:var(--ink)">10/6 00:16</strong>，建议 10/5 <strong style="color:var(--ink)">21:00 前到机场</strong>。
-            当天从 Cervantes 出发只需约 2.5h，下午即可回到珀斯还车、吃饭休整，几乎没有误机风险。
+            四个方案的最后一天都安排在 3h 车程以内回到珀斯，留出还车、吃饭和值机时间。
           </p>
         </div>
       </div>
@@ -660,389 +711,380 @@
   <footer>
     <div class="wrap">
       <div class="brand">Coral Coast</div>
-      <p>2026.9.26–10.6 · 单人自驾 · 珀斯 ↔ 卡尔巴里折返 · 珀斯取还车</p>
+      <p>2026.9.26–10.6 · 单人自驾 · 四方案对照 · 珀斯取还车</p>
     </div>
   </footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script>
-    const stops = [
-      {
-        id: "perth",
-        day: "9/26 · 10/5",
-        name: "珀斯 Perth",
-        lat: -31.9554,
-        lng: 115.8586,
-        stay: "首尾各一次",
-        drive: "取还车",
-        type: "stay",
-        summary: "9/26 早到休整取车；10/5 下午回城还车，夜间去机场赶 10/6 00:16。"
+    const PLACES = {
+      perth: { name: "珀斯 Perth", lat: -31.9554, lng: 115.8586, type: "stay" },
+      fremantle: { name: "弗里曼特尔 Fremantle", lat: -32.0569, lng: 115.7439, type: "sight" },
+      lancelin: { name: "Lancelin 沙丘", lat: -31.0167, lng: 115.3333, type: "sight" },
+      pinnacles: { name: "尖石阵 Pinnacles", lat: -30.6063, lng: 115.1602, type: "sight" },
+      cervantes: { name: "Cervantes", lat: -30.4992, lng: 115.0647, type: "stay" },
+      jurien: { name: "Jurien Bay", lat: -30.305, lng: 115.04, type: "stay" },
+      dongara: { name: "Dongara / Port Denison", lat: -29.25, lng: 114.9333, type: "stay" },
+      geraldton: { name: "杰拉尔顿 Geraldton", lat: -28.7741, lng: 114.6083, type: "stay" },
+      coalseam: { name: "Coalseam 野花保护区", lat: -29.0167, lng: 115.5333, type: "sight" },
+      huttlagoon: { name: "Hutt Lagoon 粉红湖", lat: -28.0692, lng: 114.1984, type: "sight" },
+      kalbarri: { name: "卡尔巴里 Kalbarri", lat: -27.7104, lng: 114.1646, type: "stay" },
+      kalbarrinp: { name: "Kalbarri 峡谷 / Skywalk", lat: -27.575, lng: 114.455, type: "sight" },
+      carnarvon: { name: "卡纳文 Carnarvon", lat: -24.8801, lng: 113.6589, type: "stay" },
+      coralbay: { name: "Coral Bay", lat: -23.1422, lng: 113.7763, type: "stay" },
+      exmouth: { name: "Exmouth / 宁格鲁", lat: -21.9317, lng: 114.1205, type: "stay" },
+      turquoise: { name: "Turquoise Bay", lat: -22.0314, lng: 113.9325, type: "sight" },
+      busselton: { name: "Busselton 栈桥", lat: -33.6555, lng: 115.3475, type: "sight" },
+      margaret: { name: "玛格丽特河 Margaret River", lat: -33.955, lng: 115.075, type: "stay" }
+    };
+
+    const gmapsUrl = (origin, destination, waypoints) =>
+      "https://www.google.com/maps/dir/?api=1&origin=" +
+      encodeURIComponent(origin) +
+      "&destination=" +
+      encodeURIComponent(destination) +
+      (waypoints && waypoints.length ? "&waypoints=" + encodeURIComponent(waypoints.join("|")) : "") +
+      "&travelmode=driving";
+
+    const embedUrl = (from, to, via) =>
+      "https://maps.google.com/maps?f=d&hl=zh-CN&saddr=" +
+      encodeURIComponent(from) +
+      "&daddr=" +
+      (via || []).concat([to]).map(encodeURIComponent).join("+to:") +
+      "&ie=UTF8&t=m&z=6&output=embed";
+
+    const PLANS = {
+      kalbarri: {
+        title: "卡尔巴里折返（原版）",
+        tagline: "最北到卡尔巴里，往返约 1,150 km，每天开车基本不超过 2.5 小时，珀斯取还车。",
+        stats: [
+          { v: "1,150 km", k: "总里程" },
+          { v: "约 2.5h", k: "最长单日车程" },
+          { v: "3 晚", k: "卡尔巴里" },
+          { v: "0", k: "航班 / 异地还车" }
+        ],
+        chips: ["9/26 珀斯", "9/27 尖石阵", "9/28–29 Geraldton ×2", "9/30–10/2 Kalbarri ×3", "10/3 Dongara", "10/4 Cervantes", "10/5 回珀斯"],
+        callout: "<strong>最省力的版本。</strong>9/29 是完全弹性日，累了可以整天不开车；10/4 住 Cervantes 离珀斯只剩 2.5h，几乎没有误机风险。9 月底正逢野花季。",
+        warn: false,
+        outbound: ["perth", "cervantes", "jurien", "dongara", "geraldton", "huttlagoon", "kalbarri"],
+        back: ["kalbarri", "geraldton", "dongara", "cervantes", "perth"],
+        extra: ["lancelin", "pinnacles", "coalseam", "kalbarrinp"],
+        gmaps: {
+          all: gmapsUrl("Perth WA, Australia", "Perth WA, Australia", ["Cervantes WA", "Jurien Bay WA", "Geraldton WA", "Hutt Lagoon Port Gregory WA", "Kalbarri WA", "Dongara WA", "Lancelin WA"]),
+          out: gmapsUrl("Perth WA, Australia", "Kalbarri WA, Australia", ["Cervantes WA", "Jurien Bay WA", "Geraldton WA", "Hutt Lagoon Port Gregory WA"]),
+          ret: gmapsUrl("Kalbarri WA, Australia", "Perth WA, Australia", ["Geraldton WA", "Dongara WA", "Cervantes WA", "Lancelin WA"]),
+          embed: embedUrl("Perth WA", "Kalbarri WA", ["Cervantes WA", "Jurien Bay WA", "Geraldton WA", "Hutt Lagoon Port Gregory WA"])
+        },
+        notes: [
+          "每段车程 1.5–2.5h，几乎没有硬赶路日",
+          "9/29 弹性日：野花、Abrolhos 观光飞行或全休",
+          "Kalbarri 住 3 晚，海岸与峡谷分开走",
+          "10/4 尖石阵放傍晚，光影最好",
+          "10/5 只开 2.5h，从容还车赶航班"
+        ],
+        days: [
+          { d: "26", date: "9月26日 周六", at: "perth", t: "抵达珀斯 · 休整取车", b: "早上落地先补眠。下午取车，在市区附近熟悉左侧行驶，顺便买水、零食和防晒。", stay: "珀斯", drive: "市区短途", leg: "out" },
+          { d: "27", date: "9月27日 周日", at: "jurien", t: "海岸公路 → 尖石阵 → Jurien Bay", b: "走 Indian Ocean Drive 北上，可停 Lancelin 沙丘。下午逛尖石阵，傍晚住 Jurien Bay 或 Cervantes。", stay: "Jurien Bay / Cervantes", drive: "约 2.5h", leg: "out" },
+          { d: "28", date: "9月28日 周一", at: "geraldton", t: "→ Dongara → Geraldton", b: "沿海北上，中途在 Dongara / Port Denison 停下吃饭走走。下午到 Geraldton 安顿。", stay: "Geraldton 第 1 晚", drive: "约 2.5h", leg: "out" },
+          { d: "29", date: "9月29日 周二", at: "coalseam", t: "野花日 / 弹性休息日", b: "去 Coalseam 或 Mullewa 一带看野花（单程约 1.5h）。不想动就留在 Geraldton 休息，或加订 Abrolhos 观光飞行。", stay: "Geraldton 第 2 晚", drive: "短途往返或全休", leg: "out" },
+          { d: "30", date: "9月30日 周三", at: "kalbarri", t: "粉红湖 → 卡尔巴里", b: "经 Northampton 转往 Port Gregory，停 Hutt Lagoon 粉红湖拍照，下午到 Kalbarri 入住。", stay: "Kalbarri 第 1 晚", drive: "约 2.5h", leg: "out" },
+          { d: "01", date: "10月1日 周四", at: "kalbarri", t: "卡尔巴里海岸线", b: "Natural Bridge、Island Rock、Eagle Gorge 等悬崖观景点一路短停。下午镇上休息。", stay: "Kalbarri 第 2 晚", drive: "镇区短途", leg: "out" },
+          { d: "02", date: "10月2日 周五", at: "kalbarrinp", t: "峡谷与 Skywalk", b: "清晨进国家公园：Skywalk、Nature’s Window，体力够可加 Z Bend。中午前回镇避晒。", stay: "Kalbarri 第 3 晚", drive: "园区往返约 1.5h", leg: "out" },
+          { d: "03", date: "10月3日 周六", at: "dongara", t: "南返第一段 · Dongara", b: "上午离开 Kalbarri，经 Geraldton 一路南下。车程短，下午在海边发呆或走栈桥。", stay: "Dongara / Port Denison", drive: "约 2.5h", leg: "back" },
+          { d: "04", date: "10月4日 周日", at: "cervantes", t: "Cervantes · 尖石阵日落", b: "继续南下到 Cervantes。傍晚再去一次尖石阵，斜光下的石柱比正午好看得多。", stay: "Cervantes", drive: "约 2h", leg: "back" },
+          { d: "05", date: "10月5日 周一", at: "perth", t: "海岸公路回珀斯 · 还车", b: "上午沿 Indian Ocean Drive 回珀斯，可再停 Lancelin。下午还车，Kings Park 或 Fremantle 吃饭。约 21:00 去机场。", stay: "赶飞机", drive: "约 2.5h", leg: "back" }
+        ],
+        table: [
+          ["9/26", "抵达珀斯", "—", "珀斯"],
+          ["9/27", "珀斯 → 尖石阵 → Jurien Bay", "约 2.5h", "Jurien Bay"],
+          ["9/28", "→ Dongara → Geraldton", "约 2.5h", "Geraldton"],
+          ["9/29", "野花 / 弹性日", "短途往返", "Geraldton"],
+          ["9/30", "→ 粉红湖 → Kalbarri", "约 2.5h", "Kalbarri"],
+          ["10/1–2", "卡尔巴里海岸 + 峡谷", "园区短途", "Kalbarri"],
+          ["10/3", "Kalbarri → Dongara", "约 2.5h", "Dongara"],
+          ["10/4", "→ Cervantes（尖石阵日落）", "约 2h", "Cervantes"],
+          ["10/5", "→ 珀斯 → 机场", "约 2.5h", "赶 00:16"]
+        ]
       },
-      {
-        id: "lancelin",
-        day: "9/27 · 10/5",
-        name: "Lancelin 沙丘",
-        lat: -31.0167,
-        lng: 115.3333,
-        stay: "途经",
-        drive: "珀斯约 1.5h",
-        type: "sight",
-        summary: "海岸公路上的白沙丘，可看可滑沙。北上或南返顺路停一次即可。"
+
+      "kalbarri-south": {
+        title: "卡尔巴里 + 西南线",
+        tagline: "北线压到 5 天，后半段折回珀斯南下玛格丽特河，南北风景都吃到。",
+        stats: [
+          { v: "1,800 km", k: "总里程" },
+          { v: "约 3.5h", k: "最长单日车程" },
+          { v: "2 晚 / 2 晚", k: "Kalbarri / 玛河" },
+          { v: "0", k: "航班 / 异地还车" }
+        ],
+        chips: ["9/26 珀斯", "9/27 尖石阵", "9/28 Geraldton", "9/29–30 Kalbarri ×2", "10/1 南返 Jurien", "10/2 珀斯 / Fremantle", "10/3–4 玛格丽特河 ×2", "10/5 回珀斯"],
+        callout: "<strong>想南北都走一点就选这个。</strong>北线精简为 Kalbarri 2 晚，10/2 回到珀斯换个节奏，再南下玛格丽特河看酒庄、海滩和洞穴。最长单日约 3.5h，仍在单人可控范围。",
+        warn: false,
+        outbound: ["perth", "cervantes", "geraldton", "huttlagoon", "kalbarri"],
+        back: ["kalbarri", "jurien", "perth", "busselton", "margaret"],
+        extra: ["pinnacles", "fremantle", "dongara"],
+        gmaps: {
+          all: gmapsUrl("Perth WA, Australia", "Perth WA, Australia", ["Cervantes WA", "Geraldton WA", "Kalbarri WA", "Jurien Bay WA", "Busselton WA", "Margaret River WA"]),
+          out: gmapsUrl("Perth WA, Australia", "Kalbarri WA, Australia", ["Cervantes WA", "Geraldton WA", "Hutt Lagoon Port Gregory WA"]),
+          ret: gmapsUrl("Kalbarri WA, Australia", "Perth WA, Australia", ["Jurien Bay WA", "Busselton WA", "Margaret River WA"]),
+          embed: embedUrl("Perth WA", "Margaret River WA", ["Cervantes WA", "Geraldton WA", "Kalbarri WA", "Jurien Bay WA", "Busselton WA"])
+        },
+        notes: [
+          "北线压缩：Geraldton 只住 1 晚，Kalbarri 2 晚",
+          "10/1 Kalbarri → Jurien Bay 约 3.5h，是最长的一天",
+          "10/2 回珀斯后可逛 Fremantle 换换口味",
+          "玛格丽特河 2 晚：酒庄别贪多，2–3 家足够",
+          "10/5 玛河 → 珀斯约 3h，上午出发即可"
+        ],
+        days: [
+          { d: "26", date: "9月26日 周六", at: "perth", t: "抵达珀斯 · 休整取车", b: "早上落地补眠，下午取车熟悉左侧行驶，采买路上补给。", stay: "珀斯", drive: "市区短途", leg: "out" },
+          { d: "27", date: "9月27日 周日", at: "cervantes", t: "海岸公路 → 尖石阵 → Cervantes", b: "走 Indian Ocean Drive，可停 Lancelin 沙丘。傍晚看尖石阵，就近住 Cervantes。", stay: "Cervantes", drive: "约 2.5h", leg: "out" },
+          { d: "28", date: "9月28日 周一", at: "geraldton", t: "→ Dongara → Geraldton", b: "沿海北上，Dongara 停留吃饭。下午到 Geraldton，逛海边。", stay: "Geraldton", drive: "约 3h", leg: "out" },
+          { d: "29", date: "9月29日 周二", at: "kalbarri", t: "粉红湖 → 卡尔巴里", b: "经 Port Gregory 停 Hutt Lagoon 粉红湖。下午到 Kalbarri，走海岸悬崖观景点看日落。", stay: "Kalbarri 第 1 晚", drive: "约 2.5h", leg: "out" },
+          { d: "30", date: "9月30日 周三", at: "kalbarrinp", t: "卡尔巴里峡谷日", b: "清晨 Skywalk 与 Nature’s Window，中午前回镇。下午海边或镇上休息。", stay: "Kalbarri 第 2 晚", drive: "园区往返约 1.5h", leg: "out" },
+          { d: "01", date: "10月1日 周四", at: "jurien", t: "南返长途日 · Jurien Bay", b: "本行程最长的一天（约 3.5h）。中途 Geraldton 或 Dongara 停下休息，傍晚到 Jurien Bay。", stay: "Jurien Bay", drive: "约 3.5h", leg: "back" },
+          { d: "02", date: "10月2日 周五", at: "perth", t: "回珀斯 · Fremantle", b: "上午回珀斯（约 2.5h）。下午逛 Fremantle 港口与咖啡街，晚上住珀斯，换个节奏。", stay: "珀斯 / Fremantle", drive: "约 2.5h", leg: "back" },
+          { d: "03", date: "10月3日 周六", at: "margaret", t: "南下 · Busselton → 玛格丽特河", b: "南下途中停 Busselton 长栈桥。下午到 Margaret River 入住，镇上走走。", stay: "玛格丽特河 第 1 晚", drive: "约 3h", leg: "back" },
+          { d: "04", date: "10月4日 周日", at: "margaret", t: "玛格丽特河一日", b: "上午海滩或 Mammoth / Lake Cave 洞穴，中午酒庄午餐，下午再选一家精品酒庄。", stay: "玛格丽特河 第 2 晚", drive: "区域短途", leg: "back" },
+          { d: "05", date: "10月5日 周一", at: "perth", t: "回珀斯 · 还车", b: "上午出发回珀斯（约 3h）。下午还车、吃饭休整，约 21:00 前往机场赶 10/6 00:16。", stay: "赶飞机", drive: "约 3h", leg: "back" }
+        ],
+        table: [
+          ["9/26", "抵达珀斯", "—", "珀斯"],
+          ["9/27", "珀斯 → 尖石阵 → Cervantes", "约 2.5h", "Cervantes"],
+          ["9/28", "→ Geraldton", "约 3h", "Geraldton"],
+          ["9/29", "→ 粉红湖 → Kalbarri", "约 2.5h", "Kalbarri"],
+          ["9/30", "卡尔巴里峡谷", "园区短途", "Kalbarri"],
+          ["10/1", "Kalbarri → Jurien Bay", "约 3.5h", "Jurien Bay"],
+          ["10/2", "→ 珀斯 / Fremantle", "约 2.5h", "珀斯"],
+          ["10/3", "→ Busselton → 玛格丽特河", "约 3h", "玛格丽特河"],
+          ["10/4", "玛格丽特河一日", "区域短途", "玛格丽特河"],
+          ["10/5", "→ 珀斯 → 机场", "约 3h", "赶 00:16"]
+        ]
       },
-      {
-        id: "pinnacles",
-        day: "9/27 · 10/4",
-        name: "尖石阵 Pinnacles",
-        lat: -30.6063,
-        lng: 115.1602,
-        stay: "途经",
-        drive: "Cervantes 约 20 分钟",
-        type: "sight",
-        summary: "住 Cervantes 就在旁边。10/4 傍晚再去一次，光影最好。"
+
+      "exmouth-drive": {
+        title: "Exmouth 自驾往返",
+        tagline: "全程自驾直上宁格鲁再南返，风景最完整，但一个人开非常累。",
+        stats: [
+          { v: "2,500 km", k: "总里程" },
+          { v: "约 7h", k: "最长单日车程" },
+          { v: "3 晚", k: "Exmouth" },
+          { v: "0", k: "航班 / 异地还车" }
+        ],
+        chips: ["9/26 珀斯", "9/27 Geraldton", "9/28 Kalbarri", "9/29 Carnarvon", "9/30–10/2 Exmouth ×3", "10/3 Coral Bay", "10/4 Cervantes", "10/5 回珀斯"],
+        callout: "<strong style='color:var(--coral)'>单人驾驶请谨慎。</strong>10/4 需要连开约 7 小时，且全程无人换手；末日还要接 00:16 红眼航班。若坚持要去宁格鲁，更建议下面的「飞去飞回」版本。",
+        warn: true,
+        outbound: ["perth", "geraldton", "kalbarri", "carnarvon", "exmouth"],
+        back: ["exmouth", "coralbay", "huttlagoon", "cervantes", "perth"],
+        extra: ["turquoise", "pinnacles", "kalbarrinp"],
+        gmaps: {
+          all: gmapsUrl("Perth WA, Australia", "Perth WA, Australia", ["Geraldton WA", "Kalbarri WA", "Carnarvon WA", "Exmouth WA", "Coral Bay WA", "Hutt Lagoon Port Gregory WA", "Cervantes WA"]),
+          out: gmapsUrl("Perth WA, Australia", "Exmouth WA, Australia", ["Geraldton WA", "Kalbarri WA", "Carnarvon WA"]),
+          ret: gmapsUrl("Exmouth WA, Australia", "Perth WA, Australia", ["Coral Bay WA", "Hutt Lagoon Port Gregory WA", "Cervantes WA"]),
+          embed: embedUrl("Perth WA", "Exmouth WA", ["Geraldton WA", "Kalbarri WA", "Carnarvon WA"])
+        },
+        notes: [
+          "10/4 约 7h 是全行程最重的一天，务必早发",
+          "北上 9/27 尖石阵可略过，留给 10/5 金光",
+          "Coral Bay、Cervantes 房源紧，比 Carnarvon 更要早订",
+          "每天出发前检查油量与水，午后避免长时间连续驾驶",
+          "若途中感觉疲劳，随时改为在 Carnarvon 或 Geraldton 加住一晚"
+        ],
+        days: [
+          { d: "26", date: "9月26日 周六", at: "perth", t: "抵达珀斯 · 取车", b: "早上落地补眠，下午取车与采买。今晚早睡，明天是长途日。", stay: "珀斯", drive: "市区短途", leg: "out" },
+          { d: "27", date: "9月27日 周日", at: "geraldton", t: "北上 Geraldton", b: "以赶路为主直奔 Geraldton / Dongara。尖石阵细逛留给 10/5 回程金光。", stay: "Geraldton", drive: "约 4–5h", leg: "out" },
+          { d: "28", date: "9月28日 周一", at: "kalbarri", t: "卡尔巴里 · 海岸线", b: "开往 Kalbarri。下午 Natural Bridge、Island Rock 等观景点，看悬崖日落。", stay: "Kalbarri", drive: "约 2h", leg: "out" },
+          { d: "29", date: "9月29日 周二", at: "carnarvon", t: "峡谷上午 → Carnarvon", b: "清晨 Skywalk 或 Nature’s Window，中午前出园，下午开到 Carnarvon 过夜。", stay: "Carnarvon", drive: "园区 + 约 4.5h", leg: "out" },
+          { d: "30", date: "9月30日 周三", at: "exmouth", t: "抵达 Exmouth", b: "Carnarvon → Exmouth 约 3.5h。下午安顿，傍晚 Vlamingh Head 灯塔日落。", stay: "Exmouth 第 1 晚", drive: "约 3.5h", leg: "out" },
+          { d: "01", date: "10月1日 周四", at: "turquoise", t: "宁格鲁浮潜日", b: "Turquoise Bay 浮潜（注意水流方向），或报浮潜团。整日 Ningaloo / Cape Range。", stay: "Exmouth 第 2 晚", drive: "往返约 2h", leg: "out" },
+          { d: "02", date: "10月2日 周五", at: "exmouth", t: "再潜一天 / Cape Range", b: "第二次浮潜或走 Mandu Mandu 步道，碰运气看海龟。今晚仍住 Exmouth。", stay: "Exmouth 第 3 晚", drive: "短途", leg: "out" },
+          { d: "03", date: "10月3日 周六", at: "coralbay", t: "南返 · Coral Bay 浮潜", b: "上午离开 Exmouth，约 2.5h 到 Coral Bay。下午岸潜，傍晚海边散步。", stay: "Coral Bay", drive: "约 2.5h", leg: "back" },
+          { d: "04", date: "10月4日 周日", at: "cervantes", t: "粉红湖 → Cervantes（最长日）", b: "全程最重的一天，约 7h。经 Carnarvon 后往 Port Gregory 停 Hutt Lagoon 粉红湖，傍晚到 Cervantes。务必早发、多休息。", stay: "Cervantes", drive: "约 7h + 停靠", leg: "back" },
+          { d: "05", date: "10月5日 周一", at: "pinnacles", t: "尖石阵金光 · 回珀斯", b: "清晨拍 Pinnacles，再走 Indian Ocean Drive 回珀斯。下午还车休整，约 21:00 去机场。", stay: "赶飞机", drive: "约 2.5h", leg: "back" }
+        ],
+        table: [
+          ["9/26", "抵达珀斯", "—", "珀斯"],
+          ["9/27", "北上（尖石阵可略）", "约 4–5h", "Geraldton"],
+          ["9/28", "Kalbarri 海岸", "约 2h", "Kalbarri"],
+          ["9/29", "峡谷后 → Carnarvon", "园区 + 4.5h", "Carnarvon"],
+          ["9/30–10/2", "Exmouth / 宁格鲁", "到镇 3.5h", "Exmouth ×3"],
+          ["10/3", "→ Coral Bay 浮潜", "约 2.5h", "Coral Bay"],
+          ["10/4", "粉红湖 → Cervantes", "约 7h", "Cervantes"],
+          ["10/5", "尖石阵 → 珀斯机场", "约 2.5h", "赶 00:16"]
+        ]
       },
-      {
-        id: "cervantes",
-        day: "9/27 · 10/4",
-        name: "Cervantes",
-        lat: -30.4992,
-        lng: 115.0647,
-        stay: "南返最后一晚",
-        drive: "珀斯约 2.5h",
-        type: "stay",
-        summary: "尖石阵门口小镇。10/4 住这里，傍晚拍完次日轻松回珀斯。"
-      },
-      {
-        id: "jurien",
-        day: "9/27",
-        name: "Jurien Bay",
-        lat: -30.305,
-        lng: 115.04,
-        stay: "北上第一晚",
-        drive: "Cervantes 约 25 分钟",
-        type: "stay",
-        summary: "海边小镇，可玩海狮浮潜。比当天硬冲 Geraldton 舒服很多。"
-      },
-      {
-        id: "dongara",
-        day: "9/28 · 10/3",
-        name: "Dongara / Port Denison",
-        lat: -29.25,
-        lng: 114.9333,
-        stay: "南返过夜",
-        drive: "路上休息点",
-        type: "stay",
-        summary: "安静海边小镇。北上路过吃饭，10/3 南返在此住一晚拆车程。"
-      },
-      {
-        id: "geraldton",
-        day: "9/28–29",
-        name: "杰拉尔顿 Geraldton",
-        lat: -28.7741,
-        lng: 114.6083,
-        stay: "2 晚",
-        drive: "自 Jurien 约 2.5h",
-        type: "stay",
-        summary: "北线中枢。住两晚，用一天去内陆看野花或安排 Abrolhos 观光飞行。"
-      },
-      {
-        id: "coalseam",
-        day: "9/29",
-        name: "Coalseam 野花保护区",
-        lat: -29.0167,
-        lng: 115.5333,
-        stay: "当日往返",
-        drive: "Geraldton 约 1.5h",
-        type: "sight",
-        summary: "9 月底常是地毯式野花。天气不好可改 Greenough 或海边替代。"
-      },
-      {
-        id: "huttlagoon",
-        day: "9/30",
-        name: "Hutt Lagoon 粉红湖",
-        lat: -28.0692,
-        lng: 114.1984,
-        stay: "途经拍照",
-        drive: "Port Gregory 附近",
-        type: "sight",
-        summary: "北上顺路打卡，停 20–40 分钟。中午前后颜色更明显。"
-      },
-      {
-        id: "kalbarri",
-        day: "9/30–10/2",
-        name: "卡尔巴里 Kalbarri",
-        lat: -27.7104,
-        lng: 114.1646,
-        stay: "3 晚（此行最北）",
-        drive: "自 Geraldton 约 2.5h",
-        type: "stay",
-        summary: "本次最北点。海岸悬崖 + 内陆峡谷分两天走，完全不赶。"
-      },
-      {
-        id: "kalbarrinp",
-        day: "10/2",
-        name: "Kalbarri 峡谷 / Skywalk",
-        lat: -27.575,
-        lng: 114.455,
-        stay: "仍住 Kalbarri",
-        drive: "镇区约 40–60 分钟",
-        type: "sight",
-        summary: "Skywalk、Nature’s Window、Z Bend。清晨出发凉快，中午前回镇。"
+
+      "exmouth-fly": {
+        title: "Exmouth 飞去飞回 + 西南自驾",
+        tagline: "北段坐飞机、当地租小车，南段自己开去玛格丽特河，长途独驾降到最低。",
+        stats: [
+          { v: "约 700 km", k: "自驾里程" },
+          { v: "约 3h", k: "最长单日车程" },
+          { v: "4 晚", k: "Exmouth" },
+          { v: "2 段", k: "珀斯往返航班" }
+        ],
+        chips: ["9/26 珀斯", "9/27 飞 Exmouth", "9/28–30 宁格鲁", "10/1 飞回珀斯", "10/2–3 玛格丽特河", "10/4 西南收尾", "10/5 回珀斯"],
+        callout: "<strong>既能浮潜又不用独自开长途。</strong>珀斯往返飞 Exmouth（Learmonth 机场），当地租小车只跑短途；回珀斯后再取自驾车南下玛格丽特河。代价是多一笔机票与当地租车费用。",
+        warn: false,
+        outbound: ["perth", "busselton", "margaret"],
+        back: ["exmouth", "perth"],
+        flight: true,
+        extra: ["turquoise", "coralbay", "fremantle"],
+        gmaps: {
+          all: gmapsUrl("Perth WA, Australia", "Perth WA, Australia", ["Busselton WA", "Margaret River WA", "Bunbury WA"]),
+          out: gmapsUrl("Perth WA, Australia", "Margaret River WA, Australia", ["Busselton WA"]),
+          ret: gmapsUrl("Margaret River WA, Australia", "Perth WA, Australia", ["Bunbury WA"]),
+          embed: embedUrl("Perth WA", "Margaret River WA", ["Busselton WA"])
+        },
+        notes: [
+          "9/27 飞 Learmonth（Exmouth）机场，当地租小车",
+          "宁格鲁住 4 晚，浮潜、Cape Range 都很从容",
+          "10/1 飞回珀斯当天不安排长途驾驶",
+          "南段自驾最长约 3h，全程柏油路",
+          "需额外预算：往返机票 + Exmouth 当地租车"
+        ],
+        days: [
+          { d: "26", date: "9月26日 周六", at: "perth", t: "抵达珀斯 · 休整", b: "早上落地补眠。今天不取车，傍晚 Kings Park 或河边散步，确认次日航班。", stay: "珀斯", drive: "市区公交 / 步行", leg: "out" },
+          { d: "27", date: "9月27日 周日", at: "exmouth", t: "飞 Exmouth · 当地取车", b: "珀斯飞 Learmonth 约 2h，机场取小车约 40 分钟到镇上。傍晚 Vlamingh Head 灯塔看日落。", stay: "Exmouth 第 1 晚", drive: "航班 + 约 40 分钟", leg: "fly" },
+          { d: "28", date: "9月28日 周一", at: "turquoise", t: "宁格鲁浮潜日", b: "Turquoise Bay 浮潜（注意水流方向）。全天在 Cape Range 国家公园。", stay: "Exmouth 第 2 晚", drive: "往返约 2h", leg: "out" },
+          { d: "29", date: "9月29日 周二", at: "exmouth", t: "船团 / Cape Range", b: "报浮潜或观光船团，或走 Mandu Mandu 步道，碰运气看海龟。", stay: "Exmouth 第 3 晚", drive: "短途", leg: "out" },
+          { d: "30", date: "9月30日 周三", at: "coralbay", t: "Coral Bay 一日往返（可选）", b: "南下 Coral Bay 约 1.5h，浅滩浮潜后返回；不想开车就留在 Exmouth 再潜一次。", stay: "Exmouth 第 4 晚", drive: "往返约 3h 或全休", leg: "out" },
+          { d: "01", date: "10月1日 周四", at: "perth", t: "飞回珀斯 · 取自驾车", b: "还掉当地小车，飞回珀斯。下午取自驾车，逛 Fremantle 或市区，今天不开长途。", stay: "珀斯", drive: "航班 + 市区短途", leg: "fly" },
+          { d: "02", date: "10月2日 周五", at: "margaret", t: "南下 · Busselton → 玛格丽特河", b: "南下途中停 Busselton 长栈桥。下午到 Margaret River 入住。", stay: "玛格丽特河 第 1 晚", drive: "约 3h", leg: "back" },
+          { d: "03", date: "10月3日 周六", at: "margaret", t: "玛格丽特河 · 酒庄与海滩", b: "上午 Prevelly / Gnarabup 海滩，中午酒庄午餐，下午再选一家精品酒庄。", stay: "玛格丽特河 第 2 晚", drive: "区域短途", leg: "back" },
+          { d: "04", date: "10月4日 周日", at: "margaret", t: "洞穴或灯塔 · 西南收尾", b: "Mammoth / Lake Cave 二选一，或南下 Augusta 看 Cape Leeuwin 灯塔。傍晚回镇。", stay: "玛格丽特河 第 3 晚", drive: "区域短途", leg: "back" },
+          { d: "05", date: "10月5日 周一", at: "perth", t: "回珀斯 · 还车", b: "上午出发回珀斯（约 3h），可停 Bunbury。下午还车、吃饭休整，约 21:00 去机场。", stay: "赶飞机", drive: "约 3h", leg: "back" }
+        ],
+        table: [
+          ["9/26", "抵达珀斯（不取车）", "—", "珀斯"],
+          ["9/27", "飞 Learmonth → Exmouth", "航班约 2h", "Exmouth"],
+          ["9/28–30", "宁格鲁浮潜 / Coral Bay", "当地短途", "Exmouth ×4"],
+          ["10/1", "飞回珀斯 · 取自驾车", "航班约 2h", "珀斯"],
+          ["10/2", "→ Busselton → 玛格丽特河", "约 3h", "玛格丽特河"],
+          ["10/3–4", "酒庄 / 海滩 / 洞穴", "区域短途", "玛格丽特河"],
+          ["10/5", "→ 珀斯 → 机场", "约 3h", "赶 00:16"]
+        ]
       }
-    ];
+    };
 
-    const days = [
-      {
-        key: "d1",
-        stopId: "perth",
-        label: "26",
-        dateLabel: "9月26日 周六",
-        title: "抵达珀斯 · 休整取车",
-        body: "早上落地，先补眠。下午取车，在市区附近熟悉左侧行驶和车宽，顺便买水、零食和防晒。晚上早睡。",
-        stay: "珀斯",
-        drive: "市区短途",
-        leg: "north"
-      },
-      {
-        key: "d2",
-        stopId: "jurien",
-        label: "27",
-        dateLabel: "9月27日 周日",
-        title: "海岸公路 → 尖石阵 → Jurien Bay",
-        body: "走 Indian Ocean Drive 北上，可停 Lancelin 沙丘。下午逛尖石阵，傍晚住 Jurien Bay 或 Cervantes。首日只开约 2.5h，压力小。",
-        stay: "Jurien Bay / Cervantes",
-        drive: "约 2.5h",
-        leg: "north"
-      },
-      {
-        key: "d3",
-        stopId: "geraldton",
-        label: "28",
-        dateLabel: "9月28日 周一",
-        title: "→ Dongara → Geraldton",
-        body: "沿海北上，中途在 Dongara / Port Denison 停下吃饭走走。下午到 Geraldton 安顿，看海边和纪念馆。",
-        stay: "Geraldton 第 1 晚",
-        drive: "约 2.5h",
-        leg: "north"
-      },
-      {
-        key: "d4",
-        stopId: "coalseam",
-        label: "29",
-        dateLabel: "9月29日 周二",
-        title: "野花日 / 弹性休息日",
-        body: "开车去 Coalseam 或 Mullewa 一带看野花（单程约 1.5h），9 月底通常正好。不想动就留在 Geraldton 休息，或加订 Abrolhos 群岛观光飞行。",
-        stay: "Geraldton 第 2 晚",
-        drive: "短途往返或全休",
-        leg: "north"
-      },
-      {
-        key: "d5",
-        stopId: "kalbarri",
-        label: "30",
-        dateLabel: "9月30日 周三",
-        title: "粉红湖 → 卡尔巴里",
-        body: "经 Northampton 转往 Port Gregory，停 Hutt Lagoon 粉红湖拍照，下午到 Kalbarri 入住。傍晚看海边日落。",
-        stay: "Kalbarri 第 1 晚",
-        drive: "约 2.5h（含停留）",
-        leg: "north"
-      },
-      {
-        key: "d6",
-        stopId: "kalbarri",
-        label: "01",
-        dateLabel: "10月1日 周四",
-        title: "卡尔巴里海岸线",
-        body: "Natural Bridge、Island Rock、Eagle Gorge 等悬崖观景点，一路短停。下午镇上休息，傍晚河口散步。",
-        stay: "Kalbarri 第 2 晚",
-        drive: "镇区短途",
-        leg: "north"
-      },
-      {
-        key: "d7",
-        stopId: "kalbarrinp",
-        label: "02",
-        dateLabel: "10月2日 周五",
-        title: "峡谷与 Skywalk",
-        body: "清晨进国家公园：Skywalk、Nature’s Window，体力够可加 Z Bend。中午前回镇避晒，下午彻底休息，为南返养神。",
-        stay: "Kalbarri 第 3 晚",
-        drive: "园区往返约 1.5h",
-        leg: "north"
-      },
-      {
-        key: "d8",
-        stopId: "dongara",
-        label: "03",
-        dateLabel: "10月3日 周六",
-        title: "南返第一段 · Dongara",
-        body: "上午离开 Kalbarri，经 Geraldton 一路南下到 Dongara / Port Denison。车程短，下午可在海边发呆或走栈桥。",
-        stay: "Dongara / Port Denison",
-        drive: "约 2.5h",
-        leg: "return"
-      },
-      {
-        key: "d9",
-        stopId: "cervantes",
-        label: "04",
-        dateLabel: "10月4日 周日",
-        title: "Cervantes · 尖石阵日落",
-        body: "继续南下到 Cervantes（约 2h）。傍晚再去一次尖石阵，斜光下的石柱比正午好看得多。今晚住得离珀斯只剩 2.5h。",
-        stay: "Cervantes",
-        drive: "约 2h",
-        leg: "return"
-      },
-      {
-        key: "d10",
-        stopId: "perth",
-        label: "05",
-        dateLabel: "10月5日 周一",
-        title: "海岸公路回珀斯 · 还车",
-        body: "上午沿 Indian Ocean Drive 回珀斯（约 2.5h），可再停 Lancelin。下午还车，去 Kings Park 或 Fremantle 吃个饭。约 21:00 前往机场，赶 10/6 00:16。",
-        stay: "不进房 / 赶飞机",
-        drive: "约 2.5h + 去机场",
-        leg: "return"
-      }
-    ];
+    const map = L.map("route-map", { scrollWheelZoom: false, zoomControl: true });
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
+      attribution: "&copy; OpenStreetMap &copy; CARTO",
+      maxZoom: 18
+    }).addTo(map);
 
-    const northWaypoints = [
-      "Cervantes WA",
-      "Jurien Bay WA",
-      "Geraldton WA",
-      "Hutt Lagoon Port Gregory WA"
-    ];
+    const layers = L.layerGroup().addTo(map);
+    const colors = { stay: "#0b4f6c", sight: "#1a7a6d" };
+    let markerById = {};
+    let currentBounds = null;
 
-    const southWaypoints = [
-      "Geraldton WA",
-      "Dongara WA",
-      "Cervantes WA",
-      "Lancelin WA"
-    ];
+    function markerIcon(type) {
+      const color = colors[type] || colors.stay;
+      return L.divIcon({
+        className: "",
+        iconSize: [26, 26],
+        iconAnchor: [13, 13],
+        popupAnchor: [0, -11],
+        html: `<div style="width:26px;height:26px;border-radius:50%;background:${color};border:3px solid #fff;box-shadow:0 6px 16px rgba(7,58,80,.35);"></div>`
+      });
+    }
 
-    const gmapsNorth =
-      "https://www.google.com/maps/dir/?api=1&origin=" +
-      encodeURIComponent("Perth WA, Australia") +
-      "&destination=" +
-      encodeURIComponent("Kalbarri WA, Australia") +
-      "&waypoints=" + encodeURIComponent(northWaypoints.join("|")) +
-      "&travelmode=driving";
+    function latlngs(ids, offset) {
+      return ids.map((id) => [PLACES[id].lat, PLACES[id].lng + (offset || 0)]);
+    }
 
-    const gmapsSouth =
-      "https://www.google.com/maps/dir/?api=1&origin=" +
-      encodeURIComponent("Kalbarri WA, Australia") +
-      "&destination=" +
-      encodeURIComponent("Perth WA, Australia") +
-      "&waypoints=" + encodeURIComponent(southWaypoints.join("|")) +
-      "&travelmode=driving";
+    function renderPlan(key) {
+      const plan = PLANS[key];
 
-    const gmapsRound =
-      "https://www.google.com/maps/dir/?api=1&origin=" +
-      encodeURIComponent("Perth WA, Australia") +
-      "&destination=" +
-      encodeURIComponent("Perth WA, Australia") +
-      "&waypoints=" +
-      encodeURIComponent(
-        [
-          "Cervantes WA",
-          "Jurien Bay WA",
-          "Geraldton WA",
-          "Hutt Lagoon Port Gregory WA",
-          "Kalbarri WA",
-          "Dongara WA",
-          "Lancelin WA"
-        ].join("|")
-      ) +
-      "&travelmode=driving";
+      document.querySelectorAll(".plan-tab").forEach((b) => {
+        b.setAttribute("aria-selected", String(b.dataset.plan === key));
+      });
 
-    document.getElementById("open-gmaps").href = gmapsRound;
-    document.getElementById("open-gmaps-2").href = gmapsRound;
-    document.getElementById("open-gmaps-3").href = gmapsRound;
-    document.getElementById("open-gmaps-north").href = gmapsNorth;
-    document.getElementById("open-gmaps-south").href = gmapsSouth;
+      document.getElementById("plan-title").textContent = plan.title;
+      document.getElementById("plan-tagline").textContent = plan.tagline;
+      document.getElementById("map-title").textContent = plan.title;
+      document.getElementById("notes-a-title").textContent = plan.title + " · 节奏要点";
 
-    const timeline = document.getElementById("timeline");
-    timeline.innerHTML = days
-      .map(
-        (d) => `
-      <article class="day ${d.leg === "return" ? "leg-return" : ""}" id="${d.key}" data-stop="${d.stopId}">
-        <div class="day-num">${d.label}<small>${d.dateLabel}</small></div>
+      document.getElementById("plan-stats").innerHTML = plan.stats
+        .map((s) => `<div class="stat"><b>${s.v}</b><span>${s.k}</span></div>`)
+        .join("");
+
+      document.getElementById("plan-chips").innerHTML = plan.chips
+        .map((c, i) => `<span class="chip${i >= plan.chips.length - 3 ? " return" : ""}">${c}</span>`)
+        .join("");
+
+      const callout = document.getElementById("plan-callout");
+      callout.innerHTML = plan.callout;
+      callout.classList.toggle("warn", !!plan.warn);
+
+      document.getElementById("notes-a").innerHTML = plan.notes.map((n) => `<li>${n}</li>`).join("");
+
+      document.getElementById("drive-table").innerHTML = plan.table
+        .map((r) => `<tr>${r.map((c) => `<td>${c}</td>`).join("")}</tr>`)
+        .join("");
+
+      document.getElementById("open-gmaps").href = plan.gmaps.all;
+      document.getElementById("open-gmaps-2").href = plan.gmaps.all;
+      document.getElementById("open-gmaps-3").href = plan.gmaps.all;
+      document.getElementById("open-gmaps-north").href = plan.gmaps.out;
+      document.getElementById("open-gmaps-south").href = plan.gmaps.ret;
+      document.getElementById("gmaps-embed").src = plan.gmaps.embed;
+
+      document.getElementById("timeline").innerHTML = plan.days
+        .map(
+          (d) => `
+      <article class="day ${d.leg === "back" ? "leg-return" : ""}" data-stop="${d.at}">
+        <div class="day-num">${d.d}<small>${d.date}</small></div>
         <div>
-          <h3>${d.title}</h3>
-          <p>${d.body}</p>
+          <h3>${d.t}</h3>
+          <p>${d.b}</p>
           <div class="meta">
             <span>住宿：${d.stay}</span>
             <span>交通：${d.drive}</span>
           </div>
         </div>
       </article>`
-      )
-      .join("");
+        )
+        .join("");
 
-    const map = L.map("route-map", {
-      scrollWheelZoom: false,
-      zoomControl: true
-    });
+      layers.clearLayers();
+      markerById = {};
 
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", {
-      attribution: "&copy; OpenStreetMap &copy; CARTO",
-      maxZoom: 18
-    }).addTo(map);
+      const outLL = latlngs(plan.outbound);
+      L.polyline(outLL, { color: "#0b4f6c", weight: 4, opacity: 0.9, lineJoin: "round" }).addTo(layers);
 
-    const colors = { stay: "#0b4f6c", sight: "#1a7a6d" };
+      const backLL = latlngs(plan.back, 0.25);
+      L.polyline(backLL, {
+        color: "#c45c3e",
+        weight: 3.5,
+        opacity: 0.85,
+        dashArray: plan.flight ? "4 12" : "10 10",
+        lineJoin: "round"
+      }).addTo(layers);
 
-    function markerIcon(type) {
-      const color = colors[type] || colors.stay;
-      return L.divIcon({
-        className: "",
-        iconSize: [28, 28],
-        iconAnchor: [14, 14],
-        popupAnchor: [0, -12],
-        html: `<div style="width:28px;height:28px;border-radius:50%;background:${color};border:3px solid #fff;box-shadow:0 6px 16px rgba(7,58,80,.35);"></div>`
+      const shown = new Set(plan.outbound.concat(plan.back, plan.extra || []));
+      shown.forEach((id) => {
+        const place = PLACES[id];
+        const marker = L.marker([place.lat, place.lng], { icon: markerIcon(place.type) }).addTo(layers);
+        const related = plan.days.filter((d) => d.at === id);
+        const dayText = related.length
+          ? related.map((d) => `${d.date.replace("日 ", "日 · ")}：${d.t}`).join("<br/>")
+          : "途经点";
+        marker.bindPopup(`
+          <div class="popup-day">${plan.title}</div>
+          <div class="popup-title">${place.name}</div>
+          <div style="color:#5a6b75;font-size:0.86rem;">${dayText}</div>
+        `);
+        marker.on("click", () => highlightStop(id));
+        markerById[id] = marker;
       });
+
+      currentBounds = L.latLngBounds(outLL.concat(backLL));
+      fitRoute();
+      bindDayClicks();
     }
 
-    const outboundIds = ["perth", "cervantes", "jurien", "dongara", "geraldton", "huttlagoon", "kalbarri"];
-    const outboundLatLngs = outboundIds.map((id) => {
-      const s = stops.find((x) => x.id === id);
-      return [s.lat, s.lng];
-    });
-
-    // Offset the return line so both directions stay visible on the same corridor
-    const returnIds = ["kalbarri", "geraldton", "dongara", "cervantes", "perth"];
-    const returnLatLngs = returnIds.map((id) => {
-      const s = stops.find((x) => x.id === id);
-      return [s.lat, s.lng + 0.25];
-    });
-
-    L.polyline(outboundLatLngs, {
-      color: "#0b4f6c",
-      weight: 4,
-      opacity: 0.9,
-      lineJoin: "round"
-    }).addTo(map);
-
-    L.polyline(returnLatLngs, {
-      color: "#c45c3e",
-      weight: 3.5,
-      opacity: 0.85,
-      dashArray: "10 10",
-      lineJoin: "round"
-    }).addTo(map);
-
-    const markerById = {};
-    stops.forEach((s) => {
-      const marker = L.marker([s.lat, s.lng], { icon: markerIcon(s.type) }).addTo(map);
-      marker.bindPopup(`
-        <div class="popup-day">${s.day}</div>
-        <div class="popup-title">${s.name}</div>
-        <div style="color:#5a6b75;font-size:0.88rem;margin-bottom:0.35rem;">${s.summary}</div>
-        <div style="font-size:0.8rem;font-weight:600;color:#073a50;">住宿：${s.stay}<br/>${s.drive}</div>
-      `);
-      marker.on("click", () => highlightStop(s.id));
-      markerById[s.id] = marker;
-    });
-
     function fitRoute() {
-      const bounds = L.latLngBounds(outboundLatLngs.concat(returnLatLngs));
-      map.fitBounds(bounds.pad(0.12));
+      if (currentBounds) map.fitBounds(currentBounds.pad(0.12));
     }
 
     function highlightStop(stopId) {
@@ -1053,20 +1095,28 @@
       if (first) first.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
 
-    document.getElementById("fit-route").addEventListener("click", fitRoute);
+    function bindDayClicks() {
+      document.querySelectorAll(".day").forEach((el) => {
+        el.addEventListener("click", () => {
+          const id = el.dataset.stop;
+          const marker = markerById[id];
+          if (!marker) return;
+          map.flyTo(marker.getLatLng(), Math.max(map.getZoom(), 7), { duration: 0.8 });
+          marker.openPopup();
+          highlightStop(id);
+        });
+      });
+    }
 
-    document.querySelectorAll(".day").forEach((el) => {
-      el.addEventListener("click", () => {
-        const id = el.dataset.stop;
-        const marker = markerById[id];
-        if (!marker) return;
-        map.flyTo(marker.getLatLng(), Math.max(map.getZoom(), 8), { duration: 0.8 });
-        marker.openPopup();
-        highlightStop(id);
+    document.getElementById("fit-route").addEventListener("click", fitRoute);
+    document.querySelectorAll(".plan-tab").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        renderPlan(btn.dataset.plan);
+        document.getElementById("map").scrollIntoView({ behavior: "smooth", block: "start" });
       });
     });
 
-    fitRoute();
+    renderPlan("kalbarri");
     setTimeout(() => map.invalidateSize(), 200);
     window.addEventListener("resize", () => map.invalidateSize());
   </script>
