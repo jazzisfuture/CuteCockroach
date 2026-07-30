@@ -17,13 +17,13 @@
 | 9/26 | Elizabeth Quay → CBD → Kings Park 日落 | 珀斯 |
 | 9/27 | 罗特尼斯岛 → Fremantle 市集与港口 | 珀斯 |
 | 9/28 | 取车 · 尖石阵 → Cervantes | Cervantes |
-| 9/29 | Dongara → Geraldton | Geraldton |
+| 9/29 | Dongara → Geraldton · HMAS Sydney II Memorial | Geraldton |
 | 9/30 | 粉红湖 → Kalbarri | Kalbarri |
 | 10/1 | 卡尔巴里海岸线 | Kalbarri |
 | 10/2 | 卡尔巴里峡谷与 Skywalk | Kalbarri |
-| 10/3 | 南返 Geraldton | Geraldton |
-| 10/4 | 回到珀斯 | 珀斯 |
-| 10/5 | 珀斯自由活动 → 机场 | 赶 00:16 |
+| 10/3 | 南返 Geraldton · Point Moore | Geraldton |
+| 10/4 | Brand Highway 直返珀斯 | 珀斯 |
+| 10/5 | Perth Mint → East Perth → 机场 | 赶 00:16 |
 
 ## GitHub Pages
 
