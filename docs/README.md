@@ -14,7 +14,7 @@
 
 | 日期 | 行程 | 住宿 |
 |------|------|------|
-| 9/26 | 抵达珀斯 · 休整 | 珀斯 |
+| 9/26 | Elizabeth Quay → CBD → Kings Park 日落 | 珀斯 |
 | 9/27 | Fremantle → 罗特尼斯岛 | 珀斯 |
 | 9/28 | 取车 · 尖石阵 → Cervantes | Cervantes |
 | 9/29 | Dongara → Geraldton | Geraldton |
